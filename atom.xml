@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-02-14T11:13:29.882Z</updated>
+  <updated>2019-03-25T02:44:56.541Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,9 +17,33 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title></title>
+    <link href="http://yoursite.com/uncategorized/%E7%90%86%E8%A7%A3ajax/"/>
+    <id>http://yoursite.com/uncategorized/理解ajax/</id>
+    <published>2019-03-25T02:45:44.487Z</published>
+    <updated>2019-03-25T02:44:56.541Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>由于练手的demo用到了jquery封装的ajax，之前记录在本子上了，今天想整理一下~</p></blockquote><h4 id="1-ajax原理："><a href="#1-ajax原理：" class="headerlink" title="1.ajax原理："></a>1.ajax原理：</h4><ul><li>ajax的原理简单来说通过XmlHttpRequest对象来向服务器发送异步请求，从服务器获得数据，然后用javascript来操作DOM而更新页面。<br>这其中关键的一步是从服务器获得请求数据，要清除这个过程和原理。必须对XmlHttpRequest有所了解</li><li>XMLHttpRequest是一种支持异步请求的技术。也就是说javascript可以及时向服务器提出请求和处理响应，而不阻塞用户。达到无刷新的效果。</li><li>ajax最大的优点在于不重新加载整个页面的情况下，可以与服务器交换数据并更新部分网特内容<h4 id="2-XMLHttpRequest的属性"><a href="#2-XMLHttpRequest的属性" class="headerlink" title="2.XMLHttpRequest的属性"></a>2.XMLHttpRequest的属性</h4></li><li>onreadystatechange  每次状态改变所触发事件的事件处理程序</li><li>responseText         从服务器进程返回数据的字符串形式</li><li>responseXML   从服务器进程返回的DOM兼容的文档数据对象</li><li>status 从服务器返回的数字代码。 常见的有200 （已就绪） 404（未找到）</li><li><p>readyState 对象状态值    </p><blockquote><ul><li>“0”（未初始化）对象已建立，尚未调用open方法</li><li>“1”（已初始化）对象已建立，已调用open方法，但尚未调用send方法</li><li>“2”（发送数据）send方法已被调用，但是当前的状态及http头未知</li><li>“3”  (数据传送中) 已接收部分数据，但由于响应及http头不全，这时通过respondseXML和responseText获取部分数据会出现错误。</li><li>“4”（完成） 数据接收完毕，此时可以通过responseXML和responseText获取完整的回应数据。</li></ul></blockquote><p>##</p></li></ul><h4 id="3-XMLHttpRequest方法"><a href="#3-XMLHttpRequest方法" class="headerlink" title="3.XMLHttpRequest方法"></a>3.XMLHttpRequest方法</h4><ul><li><p>send发送为POST请求</p><ul><li><p>open(method,url,async)    </p><ul><li>method  定义了向服务器提交数据的类型 post/get</li><li>url 请求的url地址和传递的参数</li><li>async  传输方式  false为同步，true为异步</li><li>（如果是异步通信方式(true)，客户机就不等待服务器的响应；如果是同步方式(false)，客户机就要等到服务器返回消息后才去执行其他操作。我们需要根据实际需要来指定同步方式，在某些页面中，可能会发出多个请求，甚至是有组织有计划有队形大规模的高强度的request，而后一个是会覆盖前一个的，这个时候当然要指定同步方式。）</li></ul><blockquote><p>get和post的区别</p></blockquote></li></ul></li></ul><ul><li>GET在浏览器回退时是无害的，而POST会再次提交请求。 </li><li>GET产生的URL地址可以被Bookmark，而POST不可以。<ul><li>GET请求会被浏览器主动cache，而POST不会，除非手动设置。 </li><li>GET请求只能进行url编码，而POST支持多种编码方式。</li></ul></li><li>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。</li><li>GET请求在URL中传送的参数是有长度限制的，而POST没有。 </li><li>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。</li><li>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。 </li><li>GET参数通过URL传递，POST放在Request body中。</li></ul><blockquote><p>GET和POST有一个重大区别：GET产生一个TCP数据包，而POST产生两个TCP数据包。<br>具体来说就是，对于GET方式的请求，浏览器会把http header和data一并发送出去，服务器响应200(返回数据)；<br>对于POST方式的请求，浏览器会先发送header，服务器响应100continue，浏览器再发送data，服务器响应200(返回数据)</p></blockquote><p>这里强推一个写post和get区别的文章 <a href="https://www.oschina.net/news/77354/http-get-post-different?tdsourcetag=s_pctim_aiomsg" target="_blank" rel="noopener">https://www.oschina.net/news/77354/http-get-post-different?tdsourcetag=s_pctim_aiomsg</a></p><blockquote><p>open（）方法和send（）方法的区别<br>参考 <a href="https://blog.csdn.net/nn131452zk/article/details/7762221" target="_blank" rel="noopener">https://blog.csdn.net/nn131452zk/article/details/7762221</a> </p></blockquote><p>（1）用open可以指定get,post </p><ul><li>一般情况下，使用Ajax提交的参数多是些简单的字符串，可以直接使用GET方法将要提交的参数写到open方法的url参数中，此时send方法的参数为null。<br>例如 ：<pre><code>var url = &quot;login.jsp?user=XXX&amp;pwd=XXX&quot;;xmlHttpRequest.open(&quot;GET&quot;,url,true);xmlHttpRequset.send(null);</code></pre></li></ul><p>（2）send发送为POST请求 </p><ul><li>此 外，也可以使用send方法传递参数。使用send方法传递参数使用的是POST方法，需要设定Content-Type头信息，模拟HTTP POST方法发送一个表单，这样服务器才会知道如何处理上传的内容。参数的提交格式和GET方法中url的写法一样。设置头信息前必须先调用open方 法。<br>例如：<br>xmlHttpRequest.open(“POST”,”login.jsp”,true);<br>xmlHttpRequest.setRequestHeder(“Content-Type”,”application/x-www-form-urlencoded;charset=UTF-8”);<br>xmlHttpRequest.send(“user=”+username+”&amp;pwd=”+password);   </li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;由于练手的demo用到了jquery封装的ajax，之前记录在本子上了，今天想整理一下~&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;1-ajax原理：&quot;&gt;&lt;a href=&quot;#1-ajax原理：&quot; class=&quot;headerlink&quot; ti
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2019/02/14/hello-world/"/>
-    <id>http://yoursite.com/2019/02/14/hello-world/</id>
+    <link href="http://yoursite.com/uncategorized/hello-world/"/>
+    <id>http://yoursite.com/uncategorized/hello-world/</id>
     <published>2019-02-14T11:13:29.882Z</published>
     <updated>2019-02-14T11:13:29.882Z</updated>
     
