@@ -1,0 +1,48 @@
+name: Hexo Deploy
+
+on:
+  # 指定只当hexo分支有push时才执行
+  push:
+    branches:
+      - hexo
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: A job to deploy blog.
+    steps:
+      #  拉取代码
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          submodules: true # Checkout private submodules(themes or something else).
+
+      # 初始化node环境
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # 配置环境 主要是git相关
+      - name: Configuration environment
+        env:
+          # 这里就是在项目setting里配置的DEPLOY_KEY
+          DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global user.name "feifeifeimoon"
+          git config --global user.email "wangyufeimoon@gmail.com"
+
+      # 安装hexo依赖
+      - name: Install dependencies
+        run: |
+          npm i -g hexo-cli
+          npm i
+         
+      # 部署hexo
+      - name: Deploy hexo
+        run: |
+          hexo deploy
