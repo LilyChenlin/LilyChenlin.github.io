@@ -27,7 +27,7 @@ jobs:
       - name: Configuration environment
         env:
           # 这里就是在项目setting里配置的DEPLOY_KEY
-          DEPLOY_KEY: ${{secrets.DEPLOY_KEY}}
+          DEPLOY_KEY: ${{secrets.HEXO_SECRET}}
         run: |
           mkdir -p ~/.ssh/
           echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
