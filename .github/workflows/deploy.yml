@@ -33,8 +33,8 @@ jobs:
           echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git config --global user.name "feifeifeimoon"
-          git config --global user.email "wangyufeimoon@gmail.com"
+          git config --global user.name "LilyChenlin"
+          git config --global user.email "906791425@qq.com"
 
       # 安装hexo依赖
       - name: Install dependencies
