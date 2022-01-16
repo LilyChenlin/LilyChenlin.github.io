@@ -5,7 +5,7 @@
 # Site
 title: LilyChenlin
 subtitle: ''
-description: 'Chen Blog'
+description: '热爱可抵岁月漫长'
 keywords:
 author: LilyChenlin
 language: zh-CN
@@ -105,3 +105,36 @@ deploy:
   type: git
   repo: git@github.com:LilyChenlin/LilyChenlin.github.io.git
   branch: main
+# search
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+# 计算阅读时间
+symbols_count_time:
+  symbols: true    # 开启字符计数
+  time: true    # 显示阅读时间
+  total_symbols: true    # 博客总字符数目
+  total_time: true    # 博客总阅读时间
+  exclude_codeblock: false
+  awl: 2  # 平均字节长度 默认为4
+  wpm: 275 # 每分钟阅读字数 默认为275
+  
+# Darkmode JS
+# For more information: https://github.com/rqh656418510/hexo-next-darkmode, https://github.com/sandoche/Darkmode.js
+darkmode_js:
+  enable: true
+  bottom: '64px' # default: '32px'
+  right: 'unset' # default: '32px'
+  left: '32px' # default: 'unset'
+  time: '0.5s' # default: '0.3s'
+  mixColor: 'transparent' # default: '#fff'
+  backgroundColor: 'transparent' # default: '#fff'
+  buttonColorDark: '#100f2c' # default: '#100f2c'
+  buttonColorLight: '#fff' # default: '#fff'
+  isActivated: false # default false
+  saveInCookies: true # default: true
+  label: '🌓' # default: ''
+  autoMatchOsTheme: true # default: true
+  libUrl: # Set custom library cdn url for Darkmode.js
