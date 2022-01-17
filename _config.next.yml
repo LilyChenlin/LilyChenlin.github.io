@@ -57,17 +57,17 @@ footer:
   # Icon between year and copyright info.
   icon:
     # Icon name in Font Awesome. See: https://fontawesome.com/icons
-    name: heart
+    name: fa fa-heart
     # If you want to animate the icon, set it to true.
-    animated: false
+    animated: true
     # Change the color of icon, using Hex Code.
     color: "#ff0000"
 
   # If not defined, `author` from Hexo `_config.yml` will be used.
-  copyright: 
+  copyright: 'LilyChenlin'
 
   # Powered by Hexo & NexT
-  powered: false
+  powered: true
 
   # Beian ICP and gongan information for Chinese users. See: https://beian.miit.gov.cn, http://www.beian.gov.cn
   beian:
