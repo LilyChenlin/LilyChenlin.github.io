@@ -14,7 +14,7 @@ ucf-scripts是bip平台统一的前端工程脚手架。
 
 # 2. 目录
 
-![目录](./读ucf-scripts脚手架源码/1.png)
+![目录](1.png)
 
 目录文件说明
 
@@ -39,7 +39,7 @@ html-webpack-plugin 为应用程序生成一个 HTML 文件，并自动将生成
 
 #### 使用
 
-![htmlWebpackPlugin配置](./读ucf-scripts脚手架源码/2.png)
+![htmlWebpackPlugin配置](2.png)
 
 - 说明
   1. filename 生成的模版文件的名字
@@ -188,7 +188,7 @@ babel-loader可以将ES6、ES7等一些浏览器不支持的高级语法编译�
 ### 5.1.2. webpack-dev-middleware
 
 生成一个与webpack的compiler绑定的中间件，在express启动的服务app中调用这个中间件。
-![devMiddleware](./读ucf-scripts脚手架源码/3.png)
+![devMiddleware](3.png)
 作用
 
 1. 通过watch mode，监听资源的变更，自动打包
@@ -198,7 +198,7 @@ babel-loader可以将ES6、ES7等一些浏览器不支持的高级语法编译�
 ### 5.1.3. webpack-hot-middleware
 
 实现页面热更新，一般与webpack-dev-middleware配合使用
-![hotMiddleware](./读ucf-scripts脚手架源码/4.png)
+![hotMiddleware](4.png)
 
 # 6. 分析
 
