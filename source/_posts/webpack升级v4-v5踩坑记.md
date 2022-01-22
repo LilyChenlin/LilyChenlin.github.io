@@ -6,7 +6,7 @@ categories: Webpack
 ---
 # 报错1 copy-webpack-plugin
 
-![image-20220118143951437](1.png)
+![1.png](1.png)
 
 之前写法
 
@@ -235,7 +235,7 @@ npm install html-webpack-plugin@5.5.0 -D
 
 # 报错9 react-dnd-html5-backend
 
-![image-20220122110741387](/14.png)
+![image-20220122110741387](14.png)
 
 盲猜react-dnd-html5-backend问题，升级react-dnd-html5-backend最新版本。
 
