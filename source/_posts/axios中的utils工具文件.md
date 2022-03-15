@@ -254,7 +254,7 @@ function isFile(val) {
 }
 ```
 
-# isBlob
+## isBlob
 
 ```javascript
 /**
