@@ -15,7 +15,7 @@ let promise1 = new Promise((resolve, reject) => {
 ```
 
 - 传入func，func的参数分别是resolve, reject
-
+<!--more-->
 ## 实现
 
 ```javascript
