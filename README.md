@@ -4,7 +4,7 @@ hexo new post <文章名>
 ```
 2. 提交规范
 - 新增文章 :memo:feat: <文章名>
-
+- 修改内容 :bug:fix: <描述>
 3. categories 
 - Algorithm
 - Webpack
