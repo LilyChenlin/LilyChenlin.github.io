@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/loveImg-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/loveImg-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1. 介绍ucf-scripts是bip平台统一的前端工程脚手架。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读ucf-scripts脚手架源码">
+<meta property="og:url" content="http://example.com/2022/01/17/%E8%AF%BBucf-scripts%E8%84%9A%E6%89%8B%E6%9E%B6%E6%BA%90%E7%A0%81/index.html">
+<meta property="og:site_name" content="LilyChenlin">
+<meta property="og:description" content="1. 介绍ucf-scripts是bip平台统一的前端工程脚手架。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2022/01/17/%E8%AF%BBucf-scripts%E8%84%9A%E6%89%8B%E6%9E%B6%E6%BA%90%E7%A0%81/1.png">
+<meta property="og:image" content="http://example.com/2022/01/17/%E8%AF%BBucf-scripts%E8%84%9A%E6%89%8B%E6%9E%B6%E6%BA%90%E7%A0%81/2.png">
+<meta property="og:image" content="http://example.com/2022/01/17/%E8%AF%BBucf-scripts%E8%84%9A%E6%89%8B%E6%9E%B6%E6%BA%90%E7%A0%81/3.png">
+<meta property="og:image" content="http://example.com/2022/01/17/%E8%AF%BBucf-scripts%E8%84%9A%E6%89%8B%E6%9E%B6%E6%BA%90%E7%A0%81/4.png">
+<meta property="article:published_time" content="2022-01-17T16:42:47.000Z">
+<meta property="article:modified_time" content="2022-04-26T02:32:59.426Z">
+<meta property="article:author" content="LilyChenlin">
+<meta property="article:tag" content="Webpack">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2022/01/17/%E8%AF%BBucf-scripts%E8%84%9A%E6%89%8B%E6%9E%B6%E6%BA%90%E7%A0%81/1.png">
+
+<link rel="canonical" href="http://example.com/2022/01/17/%E8%AF%BBucf-scripts%E8%84%9A%E6%89%8B%E6%9E%B6%E6%BA%90%E7%A0%81/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>读ucf-scripts脚手架源码 | LilyChenlin</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/LilyChenlin" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LilyChenlin</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/17/%E8%AF%BBucf-scripts%E8%84%9A%E6%89%8B%E6%9E%B6%E6%BA%90%E7%A0%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          读ucf-scripts脚手架源码
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-01-17 16:42:47" itemprop="dateCreated datePublished" datetime="2022-01-17T16:42:47+00:00">2022-01-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 02:32:59" itemprop="dateModified" datetime="2022-04-26T02:32:59+00:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Webpack/" itemprop="url" rel="index"><span itemprop="name">Webpack</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>14k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>25 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h1><p>ucf-scripts是bip平台统一的前端工程脚手架。</p>
+<span id="more"></span>
+
+
+<h1 id="2-目录"><a href="#2-目录" class="headerlink" title="2. 目录"></a>2. 目录</h1><p><img src="1.png" alt="目录"></p>
+<p>目录文件说明</p>
+<ol>
+<li>base.config.js 基础配置文件</li>
+<li>start.js 本地起服务入口文件</li>
+<li>build.js 打包服务入口文件</li>
+<li>start.config.js 本地起服务配置文件</li>
+<li>build.config.js 打包配置文件</li>
+<li>utils.js 工具方法</li>
+</ol>
+<h1 id="3-Plugins插件"><a href="#3-Plugins插件" class="headerlink" title="3. Plugins插件"></a>3. Plugins插件</h1><h2 id="3-1-start-config-js"><a href="#3-1-start-config-js" class="headerlink" title="3.1 start.config.js"></a>3.1 start.config.js</h2><h3 id="3-1-1-open-browser-plugin"><a href="#3-1-1-open-browser-plugin" class="headerlink" title="3.1.1. open-browser-plugin"></a>3.1.1. open-browser-plugin</h3><p>项目启动后自动打开浏览器</p>
+<h3 id="3-1-2-html-webpack-plugin"><a href="#3-1-2-html-webpack-plugin" class="headerlink" title="3.1.2. html-webpack-plugin"></a>3.1.2. html-webpack-plugin</h3><p>html-webpack-plugin 为应用程序生成一个 HTML 文件，并自动将生成的所有 bundle 注入到此文件中。</p>
+<h4 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h4><p><img src="2.png" alt="htmlWebpackPlugin配置"></p>
+<ul>
+<li>说明<ol>
+<li>filename 生成的模版文件的名字</li>
+<li>template 模版来源文件</li>
+<li>inject 引入模板的注入位置，取值有true/false/body/head <ul>
+<li>true：默认值，script标签位于html文件的body底部</li>
+<li>body:script标签位于html文件的body底部</li>
+<li>head:script标签位于html文件的head中</li>
+<li>false:不插入生成的js文件，这个几乎不会用到</li>
+</ul>
+</li>
+<li>chunks 引入的模块，这里指定的是entry中设置多个js时，在这里指定引入的js，如果不设置则默认全部引入</li>
+<li>hash <ul>
+<li>true 打包生成的html文件引入的js/css带有hash值</li>
+</ul>
+</li>
+<li>static_url</li>
+</ol>
+</li>
+<li>困惑解析使用require.resolve函数来查询某个模块文件的带有完整绝对路径的文件名<ol>
+<li>require.resolve(url)</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-1-3-HotModuleReplacementPlugin"><a href="#3-1-3-HotModuleReplacementPlugin" class="headerlink" title="3.1.3. HotModuleReplacementPlugin"></a>3.1.3. HotModuleReplacementPlugin</h3><p>热更新模块</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">    <span class="keyword">new</span> webpack.HotModuleReplacementPlugin(),</span><br><span class="line">    ...HtmlPlugin</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-4-DefinePlugin"><a href="#3-1-4-DefinePlugin" class="headerlink" title="3.1.4. DefinePlugin"></a>3.1.4. DefinePlugin</h3><p>允许在 <strong>编译时</strong> 将你代码中的变量替换为其他值或表达式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//环境变量注入</span></span><br><span class="line">cfg.global_env &amp;&amp; (config.plugins = config.plugins.concat(<span class="keyword">new</span> webpack.DefinePlugin(cfg.global_env)));</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-5-tinper-next-plugin"><a href="#3-1-5-tinper-next-plugin" class="headerlink" title="3.1.5. @tinper/next-plugin"></a>3.1.5. @tinper/next-plugin</h3><p>统一前端三方包接入Plugin</p>
+<h2 id="3-2-base-config-js"><a href="#3-2-base-config-js" class="headerlink" title="3.2. base.config.js"></a>3.2. base.config.js</h2><h3 id="3-2-1-BannerPlugin"><a href="#3-2-1-BannerPlugin" class="headerlink" title="3.2.1. BannerPlugin"></a>3.2.1. BannerPlugin</h3><p>webpack内置Plugin，在打包好的js文件最开始处添加版权声明。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">    <span class="keyword">new</span> webpack.BannerPlugin(&#123;</span><br><span class="line">        <span class="attr">banner</span>: <span class="string">`File:[file] Date:<span class="subst">$&#123;<span class="keyword">new</span> <span class="built_in">Date</span>()&#125;</span>`</span></span><br><span class="line">    &#125;)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-2-mini-css-extract-plugin"><a href="#3-2-2-mini-css-extract-plugin" class="headerlink" title="3.2.2. mini-css-extract-plugin"></a>3.2.2. mini-css-extract-plugin</h3><p>原本的状态是css-in-js，使用该插件后可以将css单独打包成一个文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">        <span class="keyword">new</span> MiniCssExtractPlugin(&#123;</span><br><span class="line">            <span class="attr">filename</span>: <span class="string">&#x27;[name].css&#x27;</span>,</span><br><span class="line">            <span class="attr">chunkFilename</span>: <span class="string">&#x27;[name].css&#x27;</span>,</span><br><span class="line">            <span class="attr">ignoreOrder</span>: <span class="literal">true</span></span><br><span class="line">        &#125;),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-3-ProgressPlugin"><a href="#3-2-3-ProgressPlugin" class="headerlink" title="3.2.3. ProgressPlugin"></a>3.2.3. ProgressPlugin</h3><p>webpack构建进度条。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> webpack.ProgressPlugin()</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-3-build-config-js"><a href="#3-3-build-config-js" class="headerlink" title="3.3 build.config.js"></a>3.3 build.config.js</h2><h3 id="3-3-1-CleanWebpackPlugin"><a href="#3-3-1-CleanWebpackPlugin" class="headerlink" title="3.3.1. CleanWebpackPlugin"></a>3.3.1. CleanWebpackPlugin</h3><p>删除指定目录下的文件。在项目中主要用来在每一次编译前，先删除上一次编译完后的代码。</p>
+<h3 id="3-3-2-OptimizeCSSAssetsPlugin"><a href="#3-3-2-OptimizeCSSAssetsPlugin" class="headerlink" title="3.3.2. OptimizeCSSAssetsPlugin"></a>3.3.2. OptimizeCSSAssetsPlugin</h3><p>压缩css代码</p>
+<h3 id="3-3-3-TerserWebpackPlugin"><a href="#3-3-3-TerserWebpackPlugin" class="headerlink" title="3.3.3. TerserWebpackPlugin"></a>3.3.3. TerserWebpackPlugin</h3><ol>
+<li>webpack5已内置该插件，但webpack v4并没有内置。</li>
+<li>该插件使用 <a target="_blank" rel="noopener" href="https://github.com/terser/terser">terser</a> 来压缩 JavaScript。</li>
+</ol>
+<h3 id="3-3-4-html-webpack-plugin"><a href="#3-3-4-html-webpack-plugin" class="headerlink" title="3.3.4. html-webpack-plugin"></a>3.3.4. html-webpack-plugin</h3><h3 id="3-3-5-TNSClientPlugin"><a href="#3-3-5-TNSClientPlugin" class="headerlink" title="3.3.5. TNSClientPlugin"></a>3.3.5. TNSClientPlugin</h3><h1 id="4-Loader"><a href="#4-Loader" class="headerlink" title="4. Loader"></a>4. Loader</h1><ol>
+<li>loader的顺序是从下往上，从右往左</li>
+</ol>
+<h2 id="4-1-start-config-js"><a href="#4-1-start-config-js" class="headerlink" title="4.1. start.config.js"></a>4.1. start.config.js</h2><h3 id="无"><a href="#无" class="headerlink" title="无"></a>无</h3><h2 id="4-2-base-config-js"><a href="#4-2-base-config-js" class="headerlink" title="4.2. base.config.js"></a>4.2. base.config.js</h2><h3 id="4-2-1-babel-loader"><a href="#4-2-1-babel-loader" class="headerlink" title="4.2.1. babel-loader"></a>4.2.1. babel-loader</h3><p>babel-loader可以将ES6、ES7等一些浏览器不支持的高级语法编译成浏览器可以识别的ES5语法。</p>
+<h3 id="4-2-2-css-loader"><a href="#4-2-2-css-loader" class="headerlink" title="4.2.2. css-loader"></a>4.2.2. css-loader</h3><p>对@import和url()进行处理，就像js解析import/require()一样。</p>
+<h3 id="4-2-3-postcss-loader"><a href="#4-2-3-postcss-loader" class="headerlink" title="4.2.3. postcss-loader"></a>4.2.3. postcss-loader</h3><p>进一步处理css文件，比如添加浏览器前缀，压缩CSS等。</p>
+<h3 id="4-2-4-less-loader"><a href="#4-2-4-less-loader" class="headerlink" title="4.2.4. less-loader"></a>4.2.4. less-loader</h3><p>将Less编译成css</p>
+<h3 id="4-2-5-style-loader"><a href="#4-2-5-style-loader" class="headerlink" title="4.2.5. style-loader"></a>4.2.5. style-loader</h3><p>将css插入到dom中，但是我们一般会使用MiniCSSExtractPlugin将CSS打包成独立的css文件，并通过HtmlWebpackPlugin引入css文件，所以可以不用这个loader</p>
+<h3 id="4-2-6-url-loader"><a href="#4-2-6-url-loader" class="headerlink" title="4.2.6. url-loader"></a>4.2.6. url-loader</h3><p> 将文件作为 data URI 内联到 bundle 中</p>
+<h3 id="4-2-7-file-loader"><a href="#4-2-7-file-loader" class="headerlink" title="4.2.7. file-loader"></a>4.2.7. file-loader</h3><p>将文件发送到输出目录</p>
+<h2 id="4-3-build-config-js"><a href="#4-3-build-config-js" class="headerlink" title="4.3 build.config.js"></a>4.3 build.config.js</h2><h3 id="无-1"><a href="#无-1" class="headerlink" title="无"></a>无</h3><h1 id="5-Middleware"><a href="#5-Middleware" class="headerlink" title="5. Middleware"></a>5. Middleware</h1><h2 id="5-1-start-config-js"><a href="#5-1-start-config-js" class="headerlink" title="5.1 start.config.js"></a>5.1 start.config.js</h2><h3 id="5-1-1-http-proxy-middleware"><a href="#5-1-1-http-proxy-middleware" class="headerlink" title="5.1.1. http-proxy-middleware"></a>5.1.1. http-proxy-middleware</h3><p>代理中间件，用于转发请求，将客户端发送的请求数据转发到目标服务器，再将响应输送到客户端。</p>
+<h3 id="5-1-2-webpack-dev-middleware"><a href="#5-1-2-webpack-dev-middleware" class="headerlink" title="5.1.2. webpack-dev-middleware"></a>5.1.2. webpack-dev-middleware</h3><p>生成一个与webpack的compiler绑定的中间件，在express启动的服务app中调用这个中间件。<br><img src="3.png" alt="devMiddleware"><br>作用</p>
+<ol>
+<li>通过watch mode，监听资源的变更，自动打包</li>
+<li>快速编译，走内存 ！！！</li>
+<li>返回中间件，支持express的use格式</li>
+</ol>
+<h3 id="5-1-3-webpack-hot-middleware"><a href="#5-1-3-webpack-hot-middleware" class="headerlink" title="5.1.3. webpack-hot-middleware"></a>5.1.3. webpack-hot-middleware</h3><p>实现页面热更新，一般与webpack-dev-middleware配合使用<br><img src="4.png" alt="hotMiddleware"></p>
+<h1 id="6-分析"><a href="#6-分析" class="headerlink" title="6. 分析"></a>6. 分析</h1><p><strong>本地起服务走start.js, 编译走build.js。</strong><br><strong>​</strong></p>
+<h2 id="6-1-base-config-js"><a href="#6-1-base-config-js" class="headerlink" title="6.1 base.config.js"></a>6.1 base.config.js</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基本配置</span></span><br><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">	<span class="attr">output</span>: &#123;&#125;, </span><br><span class="line">  <span class="attr">module</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">resolve</span>: &#123;&#125;,</span><br><span class="line">  <span class="attr">plugins</span>: &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-1-1-output"><a href="#6-1-1-output" class="headerlink" title="6.1.1. output"></a>6.1.1. output</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置webpack如何输出、以及在哪里输出你的「bundle、asset 和其他你所打包或使用 webpack 载入的任何内容」。</span></span><br><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">	<span class="attr">output</span>: &#123;</span><br><span class="line">        <span class="attr">path</span>: path.resolve(<span class="string">&#x27;.&#x27;</span>, dist_root, _context), <span class="comment">// 输出路径</span></span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;[name].js&#x27;</span>, <span class="comment">// bundle名称</span></span><br><span class="line">        <span class="attr">chunkFilename</span>: <span class="string">&#x27;[name].js&#x27;</span>, <span class="comment">// 非初始chunk文件的名称</span></span><br><span class="line">        <span class="attr">publicPath</span>: cfg.publicPath ? <span class="string">&#x27;/&#x27;</span> + _context : <span class="literal">undefined</span>, <span class="comment">// 在浏览器中所引用的「此输出目录对应的公开 URL」</span></span><br><span class="line">        <span class="attr">environment</span>: &#123;</span><br><span class="line">            <span class="comment">// The environment supports arrow functions (&#x27;() =&gt; &#123; ... &#125;&#x27;).</span></span><br><span class="line">            <span class="attr">arrowFunction</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="comment">// The environment supports BigInt as literal (123n).</span></span><br><span class="line">            <span class="attr">bigIntLiteral</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="comment">// The environment supports const and let for variable declarations.</span></span><br><span class="line">            <span class="attr">const</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="comment">// The environment supports destructuring (&#x27;&#123; a, b &#125; = obj&#x27;).</span></span><br><span class="line">            <span class="attr">destructuring</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="comment">// The environment supports an async import() function to import EcmaScript modules.</span></span><br><span class="line">            <span class="attr">dynamicImport</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="comment">// The environment supports &#x27;for of&#x27; iteration (&#x27;for (const x of array) &#123; ... &#125;&#x27;).</span></span><br><span class="line">            <span class="attr">forOf</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="comment">// The environment supports ECMAScript Module syntax to import ECMAScript modules (import ... from &#x27;...&#x27;).</span></span><br><span class="line">            <span class="attr">module</span>: <span class="literal">false</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-1-2-module"><a href="#6-1-2-module" class="headerlink" title="6.1.2. module"></a>6.1.2. module</h3><ol>
+<li>使用相对应的loader对js/less/css/图片/图标字体/svg等做处理编译</li>
+</ol>
+<h3 id="6-1-3-resolve"><a href="#6-1-3-resolve" class="headerlink" title="6.1.3. resolve"></a>6.1.3. resolve</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">	<span class="attr">resolve</span>: &#123;</span><br><span class="line">    		<span class="comment">// 尝试按顺序解析这些后缀名。如果有多个文件有相同的名字，但后缀名不同，webpack 会解析列在数组首位的后缀的文件 并跳过其余的后缀。</span></span><br><span class="line">        <span class="attr">extensions</span>: [</span><br><span class="line">            <span class="string">&quot;.jsx&quot;</span>, <span class="string">&quot;.js&quot;</span>, <span class="string">&quot;.less&quot;</span>, <span class="string">&quot;.css&quot;</span>, <span class="string">&quot;.json&quot;</span></span><br><span class="line">        ],</span><br><span class="line">    </span><br><span class="line">    		<span class="comment">// 别名配置</span></span><br><span class="line">        <span class="attr">alias</span>: &#123;</span><br><span class="line">            <span class="string">&#x27;ucf-apps&#x27;</span>: path.resolve(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;ucf-apps/&#x27;</span>),</span><br><span class="line">            <span class="string">&#x27;ucf-common&#x27;</span>: path.resolve(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;ucf-common/src/&#x27;</span>),</span><br><span class="line">            <span class="attr">components</span>: path.resolve(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;ucf-common/src/components/&#x27;</span>),</span><br><span class="line">            <span class="attr">static</span>: path.resolve(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;ucf-common/src/static/&#x27;</span>),</span><br><span class="line">            <span class="attr">utils</span>: path.resolve(<span class="string">&#x27;.&#x27;</span>, <span class="string">&#x27;ucf-common/src/utils/&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="6-1-4-plugins"><a href="#6-1-4-plugins" class="headerlink" title="6.1.4. plugins"></a>6.1.4. plugins</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> webpack.BannerPlugin(&#123;</span><br><span class="line">            <span class="attr">banner</span>: <span class="string">`File:[file] Date:<span class="subst">$&#123;<span class="keyword">new</span> <span class="built_in">Date</span>()&#125;</span>`</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> MiniCssExtractPlugin(&#123;</span><br><span class="line">            <span class="attr">filename</span>: <span class="string">&#x27;[name].css&#x27;</span>,</span><br><span class="line">            <span class="attr">chunkFilename</span>: <span class="string">&#x27;[name].css&#x27;</span>,</span><br><span class="line">            <span class="attr">ignoreOrder</span>: <span class="literal">true</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> webpack.ProgressPlugin()</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-2-start-js"><a href="#6-2-start-js" class="headerlink" title="6.2 start.js"></a>6.2 start.js</h2><ol>
+<li>本地起服务的时候，调用server方法，并传入{port, ip}</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> getPort = <span class="built_in">require</span>(<span class="string">&#x27;get-port&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> ip = <span class="built_in">require</span>(<span class="string">&#x27;ip&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 设置默认端口</span></span><br><span class="line">        <span class="comment">// 检测是否被占用，更换端口，启动调试服务</span></span><br><span class="line">        getPort(&#123;</span><br><span class="line">            <span class="attr">port</span>: commands.port || <span class="number">3000</span></span><br><span class="line">        &#125;).then(<span class="function"><span class="params">port</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// 启动服务</span></span><br><span class="line">            server(&#123;</span><br><span class="line">                port,</span><br><span class="line">                <span class="attr">ip</span>: ip.address()</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>server方法定义如下</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webpackConfig = <span class="built_in">require</span>(<span class="string">&#x27;./start.config&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> compiler = webpack(webpackConfig);</span><br><span class="line"></span><br><span class="line">server = <span class="function"><span class="params">opt</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 使用webpack-dev-middleware生成一个和webpack的compiler绑定的中间件</span></span><br><span class="line">    <span class="keyword">const</span> instance = devMiddleware(compiler, &#123;</span><br><span class="line">        <span class="attr">publicPath</span>: webpackConfig.output.publicPath,</span><br><span class="line">        <span class="attr">headers</span>: &#123;</span><br><span class="line">            <span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>: <span class="string">&#x27;*&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;Ucf-Server&#x27;</span>: util.getPkg().version</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">stats</span>: &#123;</span><br><span class="line">            <span class="attr">colors</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="attr">hash</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">children</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">chunks</span>: <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 静态资源托管</span></span><br><span class="line">    cfg.static &amp;&amp; app.use((cfg.context == <span class="string">&#x27;&#x27;</span> || cfg.context == <span class="literal">undefined</span>) ? <span class="string">&#x27;&#x27;</span> : <span class="string">`/<span class="subst">$&#123;cfg.context&#125;</span>`</span>, express.static(path.resolve(<span class="string">&quot;.&quot;</span>, cfg.static)));</span><br><span class="line">    <span class="comment">// 加载实例</span></span><br><span class="line">    app.use(instance);</span><br><span class="line">    <span class="comment">// 热更新</span></span><br><span class="line">    app.use(hotMiddleware(compiler));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 加载代理插件</span></span><br><span class="line">    <span class="comment">// 处理proxy数组情况</span></span><br><span class="line">    cfg.proxy &amp;&amp; cfg.proxy.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">element</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (element.enable) &#123;<span class="comment">// 代理开启</span></span><br><span class="line">            <span class="comment">// 默认配置项</span></span><br><span class="line">            <span class="keyword">let</span> proxyOpt = &#123;</span><br><span class="line">                <span class="attr">target</span>: element.url,</span><br><span class="line">                <span class="attr">logLevel</span>: <span class="string">&quot;debug&quot;</span>,</span><br><span class="line">                <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">pathRewrite</span>: <span class="built_in">Object</span>.assign(&#123;&#125;, element.pathRewrite),</span><br><span class="line">                <span class="attr">headers</span>: (<span class="keyword">typeof</span> element.headers !== <span class="string">&#x27;undefined&#x27;</span> ? element.headers : &#123;&#125;),</span><br><span class="line">                <span class="attr">onProxyRes</span>: <span class="function"><span class="keyword">function</span> (<span class="params">proxyRes</span>) </span>&#123;</span><br><span class="line">                    proxyRes.headers[<span class="string">&quot;Ucf-Proxy&quot;</span>] = <span class="string">&quot;success&quot;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            app.use(element.router, createProxyMiddleware(element.opts || proxyOpt));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 运行调试服务</span></span><br><span class="line">    app.listen(opt.port, host, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log();</span><br><span class="line">        <span class="built_in">console</span>.log(chalk.green(<span class="string">`----------------------------------------------------`</span>));</span><br><span class="line">        <span class="built_in">console</span>.log(chalk.yellow(<span class="string">`\t 🚀 UCF Develop Server`</span>));</span><br><span class="line">        <span class="built_in">console</span>.log(chalk.green(<span class="string">`\t [Server Version]: 🏅 <span class="subst">$&#123;util.getPkg().version&#125;</span>`</span>));</span><br><span class="line">        <span class="built_in">console</span>.log(chalk.green(<span class="string">`\t [Local]         : 🏠 http://<span class="subst">$&#123;browserHost&#125;</span>:<span class="subst">$&#123;opt.port&#125;</span>`</span>));</span><br><span class="line">        <span class="built_in">console</span>.log(chalk.green(<span class="string">`\t [Lan]           : 📡 http://<span class="subst">$&#123;opt.ip&#125;</span>:<span class="subst">$&#123;opt.port&#125;</span>`</span>));</span><br><span class="line">        <span class="built_in">console</span>.log(chalk.green(<span class="string">`----------------------------------------------------`</span>));</span><br><span class="line">        <span class="built_in">console</span>.log();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-3-start-config-js"><a href="#6-3-start-config-js" class="headerlink" title="6.3 start.config.js"></a>6.3 start.config.js</h2><ol>
+<li>大致的配置，会与base.config.js合并。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> base = <span class="built_in">require</span>(<span class="string">&#x27;./base.config&#x27;</span>);</span><br><span class="line"><span class="comment">//默认的配置用于merge操作</span></span><br><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">    <span class="attr">devtool</span>: <span class="string">&#x27;source-map&#x27;</span>,</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;development&#x27;</span>,</span><br><span class="line">    <span class="attr">externals</span>: cfg.externals, <span class="comment">// 构建排除指定包</span></span><br><span class="line">    <span class="attr">resolve</span>: &#123; </span><br><span class="line">        <span class="attr">alias</span>: cfg.alias <span class="comment">// 别名配置</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: cfg.loader <span class="comment">// loader配置</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> webpack.HotModuleReplacementPlugin(), <span class="comment">// 热更新Plugin</span></span><br><span class="line">        ...HtmlPlugin <span class="comment">// 查看第2点</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//入口</span></span><br><span class="line">config.entry = entries;</span><br><span class="line"></span><br><span class="line"><span class="comment">//环境变量注入</span></span><br><span class="line">cfg.global_env &amp;&amp; (config.plugins = config.plugins.concat(<span class="keyword">new</span> webpack.DefinePlugin(cfg.global_env)));</span><br><span class="line"><span class="comment">//传入插件设置</span></span><br><span class="line">cfg.devPlugins &amp;&amp; (config.plugins = config.plugins.concat(cfg.devPlugins));</span><br><span class="line"><span class="built_in">module</span>.exports = merge(base, config);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>HtmlPlugin的相关配置</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlPlugin = [];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断是否加载默认页面打开浏览器</span></span><br><span class="line"><span class="keyword">if</span> (commands.homepage) &#123;</span><br><span class="line">    HtmlPlugin.push(<span class="keyword">new</span> OpenBrowserPlugin(&#123;</span><br><span class="line">        <span class="attr">url</span>: <span class="string">`http://<span class="subst">$&#123;browserHost&#125;</span>:<span class="subst">$&#123;commands.port || <span class="number">3000</span>&#125;</span>/<span class="subst">$&#123;commands.homepage || <span class="string">&#x27;&#x27;</span>&#125;</span>`</span></span><br><span class="line">    &#125;));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//加载本地开发环境的Portal</span></span><br><span class="line">glob.sync(<span class="string">&#x27;./ucf-common/src/portal/src/app.js&#x27;</span>).forEach(<span class="function"><span class="params">_path</span> =&gt;</span> &#123;</span><br><span class="line">    entries[<span class="string">&#x27;index&#x27;</span>] = <span class="string">&#x27;./ucf-common/src/portal/src/app.js&#x27;</span>;</span><br><span class="line">    <span class="keyword">const</span> htmlConf = &#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">`index.html`</span>,</span><br><span class="line">        <span class="attr">template</span>: <span class="string">&#x27;./ucf-common/src/portal/src/index.html&#x27;</span>,</span><br><span class="line">        <span class="attr">inject</span>: <span class="string">&#x27;body&#x27;</span>,</span><br><span class="line">        <span class="attr">chunks</span>: [<span class="string">&#x27;index&#x27;</span>],</span><br><span class="line">        <span class="attr">hash</span>: <span class="literal">true</span></span><br><span class="line">    &#125;;</span><br><span class="line">    HtmlPlugin.push(<span class="keyword">new</span> HtmlWebPackPlugin(htmlConf));</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//构造模块加载入口以及html出口</span></span><br><span class="line">bootFiles.forEach(<span class="function"><span class="params">_path</span> =&gt;</span> &#123;</span><br><span class="line">  </span><br><span class="line">  	<span class="comment">// 获取上下文</span></span><br><span class="line">    <span class="keyword">let</span> _context = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span> (!cfg.publicPath &amp;&amp; cfg.context) &#123;</span><br><span class="line">        _context = <span class="string">`<span class="subst">$&#123;cfg.context&#125;</span>/`</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//模块名</span></span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">module</span> = _path.split(<span class="string">`./<span class="subst">$&#123;scan_root&#125;</span>/`</span>)[<span class="number">1</span>].split(<span class="string">`/src/<span class="subst">$&#123;bootName&#125;</span>`</span>)[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> chunk = <span class="string">`<span class="subst">$&#123;_context&#125;</span><span class="subst">$&#123;<span class="built_in">module</span>&#125;</span>/index`</span>; <span class="comment">// 拼接结果&#x27;iuap-mdm-ucf/association/index&#x27;</span></span><br><span class="line">    <span class="keyword">const</span> targetDir = _path.split(<span class="string">`/<span class="subst">$&#123;bootName&#125;</span>`</span>)[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 兼容其他类型的模版配置，如：ejs</span></span><br><span class="line">    <span class="keyword">const</span> templateType = cfg.templateType ? cfg.templateType : <span class="string">&#x27;html&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> htmlConf = <span class="built_in">Object</span>.assign(&#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">`<span class="subst">$&#123;chunk&#125;</span>.html`</span>,</span><br><span class="line">        <span class="attr">template</span>: <span class="string">`<span class="subst">$&#123;targetDir&#125;</span>/index.<span class="subst">$&#123;templateType&#125;</span>`</span>,</span><br><span class="line">        <span class="attr">inject</span>: <span class="string">&#x27;body&#x27;</span>,</span><br><span class="line">        <span class="attr">chunks</span>: [chunk],</span><br><span class="line">        <span class="attr">hash</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">static_url</span>: cfg.static_url ? cfg.static_url : <span class="string">&#x27;&#x27;</span> </span><br><span class="line">    &#125;,HtmlPluginConf);</span><br><span class="line">  </span><br><span class="line">    <span class="comment">//处理启动器逻辑</span></span><br><span class="line">    <span class="keyword">if</span> (bootList &amp;&amp; <span class="keyword">typeof</span> bootList == <span class="string">&#x27;boolean&#x27;</span>) &#123;</span><br><span class="line">        entries[chunk] = [_path, <span class="built_in">require</span>.resolve(<span class="string">&#x27;./webpack-hot-middleware/client&#x27;</span>)];</span><br><span class="line">        HtmlPlugin.push(<span class="keyword">new</span> HtmlWebPackPlugin(htmlConf));</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(bootList) &amp;&amp; bootList.length &gt; <span class="number">0</span>) &#123; <span class="comment">// 多入口</span></span><br><span class="line">        bootList.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">            _bootList.add(item);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">if</span> (_bootList.has(<span class="built_in">module</span>)) &#123;</span><br><span class="line">            entries[chunk] = [_path, <span class="built_in">require</span>.resolve(<span class="string">&#x27;./webpack-hot-middleware/client&#x27;</span>)];</span><br><span class="line">            HtmlPlugin.push(<span class="keyword">new</span> HtmlWebPackPlugin(htmlConf));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 统一前端三方包接入TNS</span></span><br><span class="line"><span class="keyword">if</span> (tnsEnabled) &#123;</span><br><span class="line">    HtmlPlugin.push(<span class="keyword">new</span> TNSClientPlugin(&#123;<span class="attr">libraryDebug</span>: <span class="literal">true</span>, ...tnsDetailCfg&#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-4-build-js"><a href="#6-4-build-js" class="headerlink" title="6.4 build.js"></a>6.4 build.js</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> webpackConfig = <span class="built_in">require</span>(<span class="string">&#x27;./build.config&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> compiler = webpack(webpackConfig);</span><br><span class="line"></span><br><span class="line"><span class="comment">//启动构建</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">plugin</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">        build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用build方法</span></span><br><span class="line">build = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log();</span><br><span class="line">    <span class="built_in">console</span>.log(chalk.green(<span class="string">`--------------------------------------------`</span>));</span><br><span class="line">    <span class="built_in">console</span>.log(chalk.yellow(<span class="string">`\t 🚀  UCF Build Server`</span>));</span><br><span class="line">    <span class="built_in">console</span>.log(chalk.green(<span class="string">`\t [Build Version] : 🏅 <span class="subst">$&#123;util.getPkg().version&#125;</span>`</span>));</span><br><span class="line">    <span class="built_in">console</span>.log();</span><br><span class="line">    <span class="built_in">console</span>.log(chalk.green(<span class="string">`\t 💪 Good Luck Please Wait ☃️`</span>));</span><br><span class="line">    <span class="built_in">console</span>.log(chalk.green(<span class="string">`--------------------------------------------`</span>));</span><br><span class="line">    <span class="built_in">console</span>.log();</span><br><span class="line">    compiler.run(<span class="function">(<span class="params">err, stats</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!err) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&#x27;\n&#x27;</span> + stats.toString(&#123;</span><br><span class="line">                <span class="attr">hash</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">chunks</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">children</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">colors</span>: <span class="literal">true</span></span><br><span class="line">            &#125;));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(chalk.red(err));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-5-build-config-js"><a href="#6-5-build-config-js" class="headerlink" title="6.5. build.config.js"></a>6.5. build.config.js</h2><ol>
+<li>大致的配置，会与base.config.js</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> config = &#123;</span><br><span class="line">    output,</span><br><span class="line">    <span class="attr">mode</span>: <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">    <span class="attr">devtool</span>: <span class="string">&#x27;cheap-module-source-map&#x27;</span>,</span><br><span class="line">    <span class="attr">externals</span>: cfg.externals,</span><br><span class="line">    <span class="attr">resolve</span>: &#123;</span><br><span class="line">        <span class="attr">alias</span>: cfg.alias</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">module</span>: &#123;</span><br><span class="line">        <span class="attr">rules</span>: cfg.loader</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">optimization</span>: &#123;</span><br><span class="line">        <span class="comment">// 不使用内部压缩参数关闭</span></span><br><span class="line">        <span class="attr">minimize</span>: <span class="literal">false</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">plugins</span>: [</span><br><span class="line">        <span class="keyword">new</span> CleanWebpackPlugin(),</span><br><span class="line">        <span class="keyword">new</span> OptimizeCSSAssetsPlugin(&#123;</span><br><span class="line">            <span class="attr">cssProcessorOptions</span>: &#123;</span><br><span class="line">                <span class="attr">safe</span>: <span class="literal">true</span>,</span><br><span class="line">                <span class="attr">mergeLonghand</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">discardComments</span>: &#123; <span class="attr">removeAll</span>: <span class="literal">true</span> &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="attr">canPrint</span>: <span class="literal">true</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="keyword">new</span> TerserPlugin(&#123;</span><br><span class="line">            <span class="comment">// test: /\.js(\?.*)?$/i,</span></span><br><span class="line">            <span class="comment">// cache: true,</span></span><br><span class="line">            <span class="attr">parallel</span>: <span class="literal">true</span>,</span><br><span class="line">            <span class="comment">// sourceMap: cfg.open_source_map == undefined ? true : cfg.open_source_map</span></span><br><span class="line">            <span class="comment">// include:&#x27;vendor&#x27;,</span></span><br><span class="line">            <span class="comment">// exclude:&#x27;vendor&#x27;,</span></span><br><span class="line">        &#125;),</span><br><span class="line">        ...HtmlPlugin <span class="comment">// 查看2点</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 入口</span></span><br><span class="line">config.entry = entries;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 环境变量注入</span></span><br><span class="line">cfg.global_env &amp;&amp; (config.plugins = config.plugins.concat(<span class="keyword">new</span> webpack.DefinePlugin(cfg.global_env)));</span><br><span class="line"><span class="comment">// 传入插件设置</span></span><br><span class="line">cfg.buildPlugins &amp;&amp; (config.plugins = config.plugins.concat(cfg.buildPlugins));</span><br><span class="line"><span class="comment">// 是否启用优化资源单独生成文件</span></span><br><span class="line">cfg.res_extra &amp;&amp; (cfg.splitChunks ? config.optimization[<span class="string">&#x27;splitChunks&#x27;</span>] = cfg.splitChunks : config.optimization[<span class="string">&#x27;splitChunks&#x27;</span>] = splitChunks);</span><br><span class="line"><span class="built_in">module</span>.exports = merge(base, config);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>HtmlPlugin</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> HtmlPlugin = [];</span><br><span class="line"></span><br><span class="line">bootFiles.forEach(<span class="function"><span class="params">_path</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">//模块名</span></span><br><span class="line">    <span class="keyword">const</span> <span class="built_in">module</span> = _path.split(<span class="string">`./<span class="subst">$&#123;scan_root&#125;</span>/`</span>)[<span class="number">1</span>].split(<span class="string">`/src/<span class="subst">$&#123;bootName&#125;</span>`</span>)[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">const</span> chunk = <span class="string">`<span class="subst">$&#123;<span class="built_in">module</span>&#125;</span>/index`</span>;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">const</span> targetDir = _path.split(<span class="string">`/<span class="subst">$&#123;bootName&#125;</span>`</span>)[<span class="number">0</span>]</span><br><span class="line">    <span class="comment">// 兼容其他类型的模版配置，如：ejs</span></span><br><span class="line">    <span class="keyword">const</span> templateType = cfg.templateType ? cfg.templateType : <span class="string">&#x27;html&#x27;</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> htmlConf = <span class="built_in">Object</span>.assign(&#123;</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">`<span class="subst">$&#123;chunk&#125;</span>.html`</span>,</span><br><span class="line">        <span class="attr">template</span>: <span class="string">`<span class="subst">$&#123;targetDir&#125;</span>/index.<span class="subst">$&#123;templateType&#125;</span>`</span>,</span><br><span class="line">        <span class="attr">inject</span>: <span class="string">&#x27;body&#x27;</span>,</span><br><span class="line">        <span class="attr">chunks</span>: [<span class="string">&#x27;vendor&#x27;</span>, chunk],</span><br><span class="line">        <span class="attr">hash</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">static_url</span>: cfg.static_url ? cfg.static_url : <span class="string">&#x27;&#x27;</span> </span><br><span class="line">        &#125;,HtmlPluginConf) ;</span><br><span class="line">        </span><br><span class="line">    <span class="comment">//处理启动器逻辑</span></span><br><span class="line">    <span class="keyword">if</span> (bootList &amp;&amp; <span class="keyword">typeof</span> bootList == <span class="string">&#x27;boolean&#x27;</span>) &#123;</span><br><span class="line">        entries[chunk] = _path;</span><br><span class="line">        HtmlPlugin.push(<span class="keyword">new</span> HtmlWebPackPlugin(htmlConf));</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(bootList) &amp;&amp; bootList.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        bootList.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;</span><br><span class="line">            _bootList.add(item);</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="keyword">if</span> (_bootList.has(<span class="built_in">module</span>)) &#123;</span><br><span class="line">            entries[chunk] = _path;</span><br><span class="line">            HtmlPlugin.push(<span class="keyword">new</span> HtmlWebPackPlugin(htmlConf));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (tnsEnabled) &#123;</span><br><span class="line">    HtmlPlugin.push(<span class="keyword">new</span> TNSClientPlugin(&#123;excludeModules&#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>其他配置</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// output输出的文件添加hash值实现缓存</span></span><br><span class="line"><span class="keyword">const</span> output = cfg.hasHash ? &#123;</span><br><span class="line">    ...base.output,</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name].[hash].js&#x27;</span>,</span><br><span class="line">    <span class="attr">chunkFilename</span>: <span class="string">&#x27;[name].[hash].js&#x27;</span>,</span><br><span class="line">&#125; : base.output;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// splitChunks进行代码分离，避免加载重复代码</span></span><br><span class="line"><span class="keyword">let</span> splitChunks = &#123;</span><br><span class="line">    <span class="attr">cacheGroups</span>: &#123;</span><br><span class="line">        <span class="attr">default</span>: &#123;</span><br><span class="line">            <span class="attr">minChunks</span>: <span class="number">2</span>,</span><br><span class="line">            <span class="attr">priority</span>: -<span class="number">20</span>,</span><br><span class="line">            <span class="attr">reuseExistingChunk</span>: <span class="literal">true</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//打包重复出现的代码</span></span><br><span class="line">        <span class="attr">vendor</span>: &#123;</span><br><span class="line">            <span class="attr">chunks</span>: <span class="string">&#x27;initial&#x27;</span>,</span><br><span class="line">            <span class="attr">minChunks</span>: <span class="number">2</span>,</span><br><span class="line">            <span class="attr">maxInitialRequests</span>: <span class="number">5</span>, <span class="comment">// The default limit is too small to showcase the effect</span></span><br><span class="line">            <span class="attr">minSize</span>: <span class="number">0</span>, <span class="comment">// This is example is too small to create commons chunks</span></span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;vendor&#x27;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//打包第三方类库</span></span><br><span class="line">        <span class="attr">commons</span>: &#123;</span><br><span class="line">            <span class="attr">name</span>: <span class="string">&#x27;vendor&#x27;</span>,</span><br><span class="line">            <span class="attr">chunks</span>: <span class="string">&#x27;initial&#x27;</span>,</span><br><span class="line">            <span class="attr">minChunks</span>: <span class="literal">Infinity</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-6-start-config-js与build-config-js差异"><a href="#6-6-start-config-js与build-config-js差异" class="headerlink" title="6.6 start.config.js与build.config.js差异"></a>6.6 start.config.js与build.config.js差异</h2><h3 id="6-6-1-start-config-js"><a href="#6-6-1-start-config-js" class="headerlink" title="6.6.1. start.config.js"></a>6.6.1. start.config.js</h3><ul>
+<li>使用HotModuleReplacementPlugin热更新模块</li>
+<li>使用open-browser-plugin本地起服务时自动打开指定页面</li>
+</ul>
+<h3 id="6-6-2-build-cofig-js"><a href="#6-6-2-build-cofig-js" class="headerlink" title="6.6.2. build.cofig.js"></a>6.6.2. build.cofig.js</h3><ul>
+<li>使用CleanWebpackPlugin在每一次构建前清除指定目录文件 </li>
+<li>使用OptimizeCSSAssetsPlugin压缩CSS代码 </li>
+<li>使用TerserWebpackPlugin压缩JS代码</li>
+</ul>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Webpack/" rel="tag"># Webpack</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2022/01/18/%E6%9C%80%E9%95%BF%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97/" rel="next" title="最长递增子序列">
+      最长递增子序列 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E4%BB%8B%E7%BB%8D"><span class="nav-text">1. 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E7%9B%AE%E5%BD%95"><span class="nav-text">2. 目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Plugins%E6%8F%92%E4%BB%B6"><span class="nav-text">3. Plugins插件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-start-config-js"><span class="nav-text">3.1 start.config.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-1-open-browser-plugin"><span class="nav-text">3.1.1. open-browser-plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-2-html-webpack-plugin"><span class="nav-text">3.1.2. html-webpack-plugin</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-text">使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-3-HotModuleReplacementPlugin"><span class="nav-text">3.1.3. HotModuleReplacementPlugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-4-DefinePlugin"><span class="nav-text">3.1.4. DefinePlugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-5-tinper-next-plugin"><span class="nav-text">3.1.5. @tinper&#x2F;next-plugin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-base-config-js"><span class="nav-text">3.2. base.config.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-BannerPlugin"><span class="nav-text">3.2.1. BannerPlugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-mini-css-extract-plugin"><span class="nav-text">3.2.2. mini-css-extract-plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-ProgressPlugin"><span class="nav-text">3.2.3. ProgressPlugin</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-build-config-js"><span class="nav-text">3.3 build.config.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-CleanWebpackPlugin"><span class="nav-text">3.3.1. CleanWebpackPlugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-OptimizeCSSAssetsPlugin"><span class="nav-text">3.3.2. OptimizeCSSAssetsPlugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-TerserWebpackPlugin"><span class="nav-text">3.3.3. TerserWebpackPlugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-4-html-webpack-plugin"><span class="nav-text">3.3.4. html-webpack-plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-5-TNSClientPlugin"><span class="nav-text">3.3.5. TNSClientPlugin</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Loader"><span class="nav-text">4. Loader</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-start-config-js"><span class="nav-text">4.1. start.config.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0"><span class="nav-text">无</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-base-config-js"><span class="nav-text">4.2. base.config.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-babel-loader"><span class="nav-text">4.2.1. babel-loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-css-loader"><span class="nav-text">4.2.2. css-loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-3-postcss-loader"><span class="nav-text">4.2.3. postcss-loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-4-less-loader"><span class="nav-text">4.2.4. less-loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-5-style-loader"><span class="nav-text">4.2.5. style-loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-6-url-loader"><span class="nav-text">4.2.6. url-loader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-7-file-loader"><span class="nav-text">4.2.7. file-loader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-build-config-js"><span class="nav-text">4.3 build.config.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0-1"><span class="nav-text">无</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Middleware"><span class="nav-text">5. Middleware</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-start-config-js"><span class="nav-text">5.1 start.config.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1-http-proxy-middleware"><span class="nav-text">5.1.1. http-proxy-middleware</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-2-webpack-dev-middleware"><span class="nav-text">5.1.2. webpack-dev-middleware</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-3-webpack-hot-middleware"><span class="nav-text">5.1.3. webpack-hot-middleware</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-%E5%88%86%E6%9E%90"><span class="nav-text">6. 分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-base-config-js"><span class="nav-text">6.1 base.config.js</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-output"><span class="nav-text">6.1.1. output</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-module"><span class="nav-text">6.1.2. module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-3-resolve"><span class="nav-text">6.1.3. resolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-4-plugins"><span class="nav-text">6.1.4. plugins</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-start-js"><span class="nav-text">6.2 start.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-3-start-config-js"><span class="nav-text">6.3 start.config.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-4-build-js"><span class="nav-text">6.4 build.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-5-build-config-js"><span class="nav-text">6.5. build.config.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-6-start-config-js%E4%B8%8Ebuild-config-js%E5%B7%AE%E5%BC%82"><span class="nav-text">6.6 start.config.js与build.config.js差异</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-1-start-config-js"><span class="nav-text">6.6.1. start.config.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-6-2-build-cofig-js"><span class="nav-text">6.6.2. build.cofig.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-text"></span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LilyChenlin"
+      src="/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">LilyChenlin</p>
+  <div class="site-description" itemprop="description">热爱可抵岁月漫长</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LilyChenlin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LilyChenlin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:15096361910@163.com" title="E-Mail → mailto:15096361910@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LilyChenlin</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">66k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:01</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+!-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love-click.js"></script>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/loveImg-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/loveImg-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Axios&#x2F;utils.js前言 这是跟随@若川 打卡源码活动的第一个打卡。 参考阅读axios源码，发现了这些实用的基础工具函数 ，不得不说，环境准备写得很细致，所以这边留个记录。 本次源码阅读的主要内容是utils.js.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="axios中的utils工具文件.md">
+<meta property="og:url" content="http://example.com/2022/03/09/axios%E4%B8%AD%E7%9A%84utils%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="LilyChenlin">
+<meta property="og:description" content="Axios&#x2F;utils.js前言 这是跟随@若川 打卡源码活动的第一个打卡。 参考阅读axios源码，发现了这些实用的基础工具函数 ，不得不说，环境准备写得很细致，所以这边留个记录。 本次源码阅读的主要内容是utils.js.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-03-09T20:43:06.000Z">
+<meta property="article:modified_time" content="2022-04-26T02:32:59.354Z">
+<meta property="article:author" content="LilyChenlin">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/03/09/axios%E4%B8%AD%E7%9A%84utils%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>axios中的utils工具文件.md | LilyChenlin</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/LilyChenlin" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LilyChenlin</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/09/axios%E4%B8%AD%E7%9A%84utils%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          axios中的utils工具文件.md
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-09 20:43:06" itemprop="dateCreated datePublished" datetime="2022-03-09T20:43:06+00:00">2022-03-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 02:32:59" itemprop="dateModified" datetime="2022-04-26T02:32:59+00:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">源码阅读</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>19 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Axios-utils-js"><a href="#Axios-utils-js" class="headerlink" title="Axios/utils.js"></a>Axios/utils.js</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ol>
+<li>这是跟随<a target="_blank" rel="noopener" href="https://juejin.cn/user/1415826704971918">@若川</a> 打卡源码活动的第一个打卡。</li>
+<li>参考<a target="_blank" rel="noopener" href="https://juejin.cn/post/7042610679815241758">阅读axios源码，发现了这些实用的基础工具函数</a> ，不得不说，环境准备写得很细致，所以这边留个记录。</li>
+<li>本次源码阅读的主要内容是<a target="_blank" rel="noopener" href="https://github.com/axios/axios/blob/master/lib/utils.js">utils.js</a>.</li>
+</ol>
+<span id="more"></span>
+<h1 id="工具函数"><a href="#工具函数" class="headerlink" title="工具函数"></a>工具函数</h1><blockquote>
+<p>本节内容将遍历utils.js中所有的工具函数</p>
+</blockquote>
+<h2 id="isArray"><a href="#isArray" class="headerlink" title="isArray"></a>isArray</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is an Array</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if value is an Array, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Array</span>.isArray(val)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="isUndefined"><a href="#isUndefined" class="headerlink" title="isUndefined"></a>isUndefined</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is undefined 判断值是否是undefined</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if the value is undefined, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isUndefined</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> val === <span class="string">&#x27;undefined&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="isBuffer"><a href="#isBuffer" class="headerlink" title="isBuffer"></a>isBuffer</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is a Buffer 判断一个值是否是Buffer类型</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if value is a Buffer, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isBuffer</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> val !== <span class="literal">null</span> &amp;&amp;</span><br><span class="line">    		 !isUndefined(val) &amp;&amp;</span><br><span class="line">    		 val.constructor !== <span class="literal">null</span> &amp;&amp;</span><br><span class="line">    		 !isUndefined(val.constructor) &amp;&amp;</span><br><span class="line">    		 <span class="keyword">typeof</span> val.constructor.isBuffer === <span class="string">&#x27;function&#x27;</span> &amp;&amp;</span><br><span class="line">    		 val.constructor.isBuffer(val); <span class="comment">// 通过构造函数的isBuffer方法来判断</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>什么是Buffer</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.runoob.com/nodejs/nodejs-buffer.html">参考</a></p>
+<p>Buffer 缓冲区</p>
+<p>存在原因：</p>
+<ol>
+<li>JavaScript 语言自身只有字符串数据类型，没有二进制数据类型。</li>
+<li>但在处理像TCP流或文件流时，必须使用到二进制数据。因此在 Node.js中，定义了一个 Buffer 类，该类用来创建一个专门存放二进制数据的缓存区。</li>
+</ol>
+<h2 id="isArrayBuffer"><a href="#isArrayBuffer" class="headerlink" title="isArrayBuffer"></a>isArrayBuffer</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> toString = <span class="built_in">Object</span>.prototype.toString;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArrayBuffer</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> toString.call(val) === <span class="string">&#x27;[object ArrayBuffer]&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>什么是ArrayBuffer</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer">参考</a></p>
+<p>ArrayBuffer 通用的、固定长度的原始二进制数据缓冲区</p>
+<h2 id="isFormData"><a href="#isFormData" class="headerlink" title="isFormData"></a>isFormData</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is a FormData</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if value is an FormData, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isFormData</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> toString.call(val) === <span class="string">&#x27;[object FormData]&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="isArrayBufferView"><a href="#isArrayBufferView" class="headerlink" title="isArrayBufferView"></a>isArrayBufferView</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is a view on an ArrayBuffer</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if value is a view on an ArrayBuffer, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArrayBufferView</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result;</span><br><span class="line">  <span class="keyword">if</span> ((<span class="keyword">typeof</span> <span class="built_in">ArrayBuffer</span> !== <span class="string">&#x27;undefined&#x27;</span>) &amp;&amp; (<span class="built_in">ArrayBuffer</span>.isView)) &#123;</span><br><span class="line">    result = <span class="built_in">ArrayBuffer</span>.isView(val);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    result = (val) &amp;&amp; (val.buffer) &amp;&amp; (isArrayBuffer(val.buffer));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>正常情况下, typeof ArrayBuffer === ‘function’</li>
+<li>Array.isView  如果参数是ArrayBuffer的视图实例则返回true</li>
+</ol>
+<h2 id="isString"><a href="#isString" class="headerlink" title="isString"></a>isString</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is a String</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if value is a String, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isString</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> val === <span class="string">&#x27;string&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="isNumber"><a href="#isNumber" class="headerlink" title="isNumber"></a>isNumber</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is a Number</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if value is a Number, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isNumber</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">typeof</span> val === <span class="string">&#x27;number&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="isObject"><a href="#isObject" class="headerlink" title="isObject"></a>isObject</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObject</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> val !== <span class="literal">null</span> &amp;&amp; <span class="keyword">typeof</span> val === <span class="string">&#x27;object&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>typeof null === ‘object’;</li>
+</ol>
+<h2 id="isPlainObject"><a href="#isPlainObject" class="headerlink" title="isPlainObject"></a>isPlainObject</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is a plain Object 判断是否是一个纯对象</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;boolean&#125;</span> </span>True if value is a plain Object, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPlainObject</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (toString.call(val) !== <span class="string">&#x27;[object Object]&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> prototype = <span class="built_in">Object</span>.getPrototypeOf(val);</span><br><span class="line">  <span class="keyword">return</span> prototype === <span class="literal">null</span> || prototype === <span class="built_in">Object</span>.prototype;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Plain Object</p>
+</blockquote>
+<ol>
+<li><p>概念： 纯粹的对象</p>
+</li>
+<li><p>怎么创建plain object，通过’{}’或’new Object’。即：</p>
+<ul>
+<li><p>let obj = {}</p>
+</li>
+<li><p>let obj = new Object()</p>
+</li>
+</ul>
+</li>
+<li><p>对isPlainObject方法的理解</p>
+<ul>
+<li>Object.getPrototypeOf(val) 获取val的原型链对象</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj1 = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> obj1Pro = <span class="built_in">Object</span>.getPrototypeOf(obj1);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;obj1Pro&quot;</span>, obj1Pro === <span class="built_in">Object</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;obj1&quot;</span>, isPlainObject(obj1)); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj2 = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="keyword">const</span> obj2Pro = <span class="built_in">Object</span>.getPrototypeOf(obj2);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;obj2Pro&quot;</span>, obj2Pro === <span class="built_in">Object</span>.prototype); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;obj2&quot;</span>, isPlainObject(obj2)); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj3 = <span class="built_in">Object</span>.create(<span class="built_in">Object</span>.prototype);</span><br><span class="line"><span class="keyword">const</span> obj3Pro = <span class="built_in">Object</span>.getPrototypeOf(obj3);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;obj3Pro&quot;</span>, obj3Pro === <span class="built_in">Object</span>.prototype); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;obj3&quot;</span>, isPlainObject(obj3)); <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">C</span>(<span class="params"></span>) </span>&#123; &#125;</span><br><span class="line"><span class="keyword">let</span> obj4 = <span class="keyword">new</span> C();</span><br><span class="line"><span class="keyword">const</span> obj4Pro = <span class="built_in">Object</span>.getPrototypeOf(obj4);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;obj4Pro&quot;</span>, obj4Pro === <span class="built_in">Object</span>.prototype); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">&quot;obj4&quot;</span>, isPlainObject(obj4)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="isDate"><a href="#isDate" class="headerlink" title="isDate"></a>isDate</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is a Date</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if value is a Date, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isDate</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> toString.call(val) === <span class="string">&#x27;[object Date]&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="isFile"><a href="#isFile" class="headerlink" title="isFile"></a>isFile</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is a File</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if value is a File, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isFile</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> toString.call(val) === <span class="string">&#x27;[object File]&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="isBlob"><a href="#isBlob" class="headerlink" title="isBlob"></a>isBlob</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is a Blob</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if value is a Blob, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isBlob</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> toString.call(val) === <span class="string">&#x27;[object Blob]&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="isFunction"><a href="#isFunction" class="headerlink" title="isFunction"></a>isFunction</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isFunction</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> toString.call(val) === <span class="string">&#x27;[object Function]&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="isStream"><a href="#isStream" class="headerlink" title="isStream"></a>isStream</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is a Stream</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if value is a Stream, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isStream</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> isObject(val) &amp;&amp; isFunction(val.pipe);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="isURLSearchParams"><a href="#isURLSearchParams" class="headerlink" title="isURLSearchParams"></a>isURLSearchParams</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if a value is a URLSearchParams object</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>val The value to test</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;boolean&#125;</span> </span>True if value is a URLSearchParams object, otherwise false</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isURLSearchParams</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> toString.call(val) === <span class="string">&#x27;[object URLSearchParams]&#x27;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="trim"><a href="#trim" class="headerlink" title="trim"></a>trim</h2><blockquote>
+<p>去除首尾空格</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Trim excess whitespace off the beginning and end of a string</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;String&#125;</span> </span>str The String to trim</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;String&#125;</span> </span>The String freed of excess whitespace</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">trim</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.trim ? str.trim() : str.replace(<span class="regexp">/^\s+|\s+$/g</span>, <span class="string">&#x27;&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="isStandardBrowserEnv"><a href="#isStandardBrowserEnv" class="headerlink" title="isStandardBrowserEnv"></a>isStandardBrowserEnv</h2><blockquote>
+<p>判断是否是标准浏览器环境</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if we&#x27;re running in a standard browser environment 是否运行在标准浏览器环境</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * This allows axios to run in a web worker, and react-native.</span></span><br><span class="line"><span class="comment"> * Both environments support XMLHttpRequest, but not fully standard globals.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * web workers:</span></span><br><span class="line"><span class="comment"> *  typeof window -&gt; undefined</span></span><br><span class="line"><span class="comment"> *  typeof document -&gt; undefined</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * react-native:</span></span><br><span class="line"><span class="comment"> *  navigator.product -&gt; &#x27;ReactNative&#x27;</span></span><br><span class="line"><span class="comment"> * nativescript</span></span><br><span class="line"><span class="comment"> *  navigator.product -&gt; &#x27;NativeScript&#x27; or &#x27;NS&#x27;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isStandardBrowserEnv</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> navigator !== <span class="string">&#x27;undefined&#x27;</span> &amp;&amp; </span><br><span class="line">       (navigator.product === <span class="string">&#x27;ReactNative&#x27;</span> ||                           </span><br><span class="line">        navigator.product === <span class="string">&#x27;NativeScript&#x27;</span> ||</span><br><span class="line">        navigator.product === <span class="string">&#x27;NS&#x27;</span>))&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"> 	&#125;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="keyword">typeof</span> <span class="built_in">window</span> !== <span class="string">&#x27;undefined&#x27;</span> &amp;&amp;</span><br><span class="line">    <span class="keyword">typeof</span> <span class="built_in">document</span> !== <span class="string">&#x27;undefined&#x27;</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Iterate over an Array or an Object invoking a function for each item.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * // fn.call(null, obj[i], i, obj);</span></span><br><span class="line"><span class="comment"> * If `obj` is an Array callback will be called passing</span></span><br><span class="line"><span class="comment"> * the value, index, and complete array for each item.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * // fn.call(null, obj[key], key, obj);</span></span><br><span class="line"><span class="comment"> * If &#x27;obj&#x27; is an Object callback will be called passing</span></span><br><span class="line"><span class="comment"> * the value, key, and complete object for each property.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object|Array&#125;</span> </span>obj The object to iterate</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Function&#125;</span> </span>fn The callback to invoke for each item</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">forEach</span>(<span class="params">obj, fn</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Don&#x27;t bother if no value provided</span></span><br><span class="line">  <span class="keyword">if</span> (obj === <span class="literal">null</span> || <span class="keyword">typeof</span> obj === <span class="string">&#x27;undefined&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Force an array if not already something iterable</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> obj !== <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">// 强制转换为可遍历类型</span></span><br><span class="line">    <span class="comment">/*eslint no-param-reassign:0*/</span></span><br><span class="line">    obj = [obj];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (isArray(obj)) &#123;</span><br><span class="line">    <span class="comment">// Iterate over array values</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = obj.length; i &lt; l; i++) &#123;</span><br><span class="line">      fn.call(<span class="literal">null</span>, obj[i], i, obj);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// Iterate over object keys</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> obj) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">Object</span>.prototype.hasOwnProperty.call(obj, key)) &#123;</span><br><span class="line">        fn.call(<span class="literal">null</span>, obj[key], key, obj);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>Object.prototype.hasOwnProperty.call(obj, key) 判断obj本身是否有key这个属性</li>
+<li>for…in 以任意顺序遍历一个对象的除<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol">Symbol</a>以外的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Enumerability_and_ownership_of_properties">可枚举</a>属性，包括继承的可枚举属性。</li>
+</ol>
+<h2 id="merge"><a href="#merge" class="headerlink" title="merge"></a>merge</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Accepts varargs expecting each argument to be an object, then</span></span><br><span class="line"><span class="comment"> * immutably merges the properties of each object and returns result.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * When multiple objects contain the same key the later object in</span></span><br><span class="line"><span class="comment"> * the arguments list will take precedence.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Example:</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * ```js</span></span><br><span class="line"><span class="comment"> * var result = merge(&#123;foo: 123&#125;, &#123;foo: 456&#125;);</span></span><br><span class="line"><span class="comment"> * console.log(result.foo); // outputs 456</span></span><br><span class="line"><span class="comment"> * ```</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>obj1 Object to merge</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns <span class="type">&#123;Object&#125;</span> </span>Result of all merge properties</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">merge</span>(<span class="params"><span class="comment">/* obj1, obj2, obj3, ... */</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> result = &#123;&#125;;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">assignValue</span>(<span class="params">val, key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isPlainObject(result[key]) &amp;&amp; isPlainObject(val)) &#123;</span><br><span class="line">      result[key] = merge(result[key], val);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isPlainObject(val)) &#123;</span><br><span class="line">      result[key] = merge(&#123;&#125;, val);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isArray(val)) &#123;</span><br><span class="line">      result[key] = val.slice();</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      result[key] = val;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, l = <span class="built_in">arguments</span>.length; i &lt; l; i++) &#123;</span><br><span class="line">    forEach(<span class="built_in">arguments</span>[i], assignValue);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p> merge</p>
+</blockquote>
+<ol>
+<li>是一个不定长参数函数，所以使用arguments类数组去获取传入的参数</li>
+<li>作用：合并对象，后面的对象如果key和前面的key是一样的，会进行覆盖。</li>
+</ol>
+<p>（蛮好玩的，可以自己写一下）</p>
+<h2 id="extend"><a href="#extend" class="headerlink" title="extend"></a>extend</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bind实现</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bind</span>(<span class="params">fn, thisArg</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">wrap</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> args = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="built_in">arguments</span>.length);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; args.length; i++) &#123;</span><br><span class="line">            args[i] = <span class="built_in">arguments</span>[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> fn.apply(thisArg, args);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Extends object a by mutably adding to it the properties of object b.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>a The object to be extended</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>b The object to copy properties from</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;Object&#125;</span> </span>thisArg The object to bind function to</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;Object&#125;</span> </span>The resulting value of object a</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params">a, b, thisArg</span>) </span>&#123;</span><br><span class="line">  forEach(b, <span class="function"><span class="keyword">function</span> <span class="title">assignValue</span>(<span class="params">val, key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (thisArg &amp;&amp; <span class="keyword">typeof</span> val === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">      a[key] = bind(val, thisArg);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      a[key] = val;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>entend</p>
+</blockquote>
+<ol>
+<li><p>传入三个参数a, b, thisArg; a是结果对象，b是被复制的对象，thisArg是this指向</p>
+</li>
+<li><p>使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123; <span class="attr">foo</span>: <span class="number">123</span> &#125;;</span><br><span class="line"><span class="keyword">let</span> b = &#123;</span><br><span class="line">    <span class="attr">foo</span>: <span class="number">456</span>,</span><br><span class="line">    <span class="attr">log</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;this指向&#x27;</span>, <span class="built_in">this</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = &#123;<span class="attr">foo</span>: <span class="number">789</span>&#125;</span><br><span class="line"><span class="keyword">var</span> result = extend(a, b, c);</span><br><span class="line"><span class="built_in">console</span>.log(result); <span class="comment">// &#123; foo: 456, log: [Function: wrap] &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(a); <span class="comment">// &#123; foo: 456, log: [Function: wrap] &#125;</span></span><br><span class="line">result.log(); <span class="comment">// this指向 &#123; foo: 789 &#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="stripBom"><a href="#stripBom" class="headerlink" title="stripBom"></a>stripBom</h2><blockquote>
+<p>删除UTF-8中的Bom</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Remove byte order marker. This catches EF BB BF (the UTF-8 BOM)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param <span class="type">&#123;string&#125;</span> </span>content with BOM</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return <span class="type">&#123;string&#125;</span> </span>content value without BOM</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stripBOM</span>(<span class="params">content</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (content.charCodeAt(<span class="number">0</span>) === <span class="number">0xFEFF</span>) &#123;</span><br><span class="line">    content = content.slice(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> content;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Bom ——  Byte Order Mark</p>
+</blockquote>
+<ol>
+<li><p>它是一个Unicode字符，通常出现在文本的开头，用来标识字节序。</p>
+</li>
+<li><p>UTF-8主要的优点是可以兼容ASCII，但如果使用BOM的话，这个好处就荡然无存了。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/02/13/leetcode-6006-%E6%8B%BF%E5%87%BA%E6%9C%80%E5%B0%91%E6%95%B0%E7%9B%AE%E7%9A%84%E9%AD%94%E6%B3%95%E8%B1%86/" rel="prev" title="leetcode-6006.拿出最少数目的魔法豆">
+      <i class="fa fa-chevron-left"></i> leetcode-6006.拿出最少数目的魔法豆
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/15/Promise%E5%AE%9E%E7%8E%B0/" rel="next" title="Promise实现">
+      Promise实现 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Axios-utils-js"><span class="nav-text">Axios&#x2F;utils.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%87%BD%E6%95%B0"><span class="nav-text">工具函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#isArray"><span class="nav-text">isArray</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isUndefined"><span class="nav-text">isUndefined</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isBuffer"><span class="nav-text">isBuffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isArrayBuffer"><span class="nav-text">isArrayBuffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isFormData"><span class="nav-text">isFormData</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isArrayBufferView"><span class="nav-text">isArrayBufferView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isString"><span class="nav-text">isString</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isNumber"><span class="nav-text">isNumber</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isObject"><span class="nav-text">isObject</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isPlainObject"><span class="nav-text">isPlainObject</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isDate"><span class="nav-text">isDate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isFile"><span class="nav-text">isFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isBlob"><span class="nav-text">isBlob</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isFunction"><span class="nav-text">isFunction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isStream"><span class="nav-text">isStream</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isURLSearchParams"><span class="nav-text">isURLSearchParams</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trim"><span class="nav-text">trim</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#isStandardBrowserEnv"><span class="nav-text">isStandardBrowserEnv</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#forEach"><span class="nav-text">forEach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#merge"><span class="nav-text">merge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#extend"><span class="nav-text">extend</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stripBom"><span class="nav-text">stripBom</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LilyChenlin"
+      src="/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">LilyChenlin</p>
+  <div class="site-description" itemprop="description">热爱可抵岁月漫长</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LilyChenlin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LilyChenlin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:15096361910@163.com" title="E-Mail → mailto:15096361910@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LilyChenlin</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">66k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:01</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+!-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love-click.js"></script>

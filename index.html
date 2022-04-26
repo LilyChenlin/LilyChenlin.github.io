@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/loveImg-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/loveImg-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="热爱可抵岁月漫长">
+<meta property="og:type" content="website">
+<meta property="og:title" content="LilyChenlin">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="LilyChenlin">
+<meta property="og:description" content="热爱可抵岁月漫长">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="LilyChenlin">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>LilyChenlin</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}.darkmode-ignore,img{display:flex!important}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/LilyChenlin" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">LilyChenlin</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/26/%E3%80%90%E8%8B%A5%E5%B7%9D%E8%A7%86%E9%87%8E-x-%E6%BA%90%E7%A0%81%E5%85%B1%E8%AF%BB%E3%80%91%E7%AC%AC24%E6%9C%9F-vue2%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/26/%E3%80%90%E8%8B%A5%E5%B7%9D%E8%A7%86%E9%87%8E-x-%E6%BA%90%E7%A0%81%E5%85%B1%E8%AF%BB%E3%80%91%E7%AC%AC24%E6%9C%9F-vue2%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7/" class="post-title-link" itemprop="url">【若川视野 x 源码共读】第24期|vue2基础工具</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-04-26 10:31:02 / 修改时间：02:32:59" itemprop="dateCreated datePublished" datetime="2022-04-26T10:31:02+00:00">2022-04-26</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">源码阅读</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>11k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>20 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>本文参加了由<a href="https://link.juejin.cn/?target=https://lxchuan12.gitee.io" title="https://lxchuan12.gitee.io">公众号@若川视野</a> 发起的每周源码共读活动，<a target="_blank" rel="noopener" href="https://juejin.cn/post/7079706017579139102" title="https://juejin.cn/post/7079706017579139102">点击了解详情一起参与。</a></strong></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ol>
+<li>这是跟随<a target="_blank" rel="noopener" href="https://juejin.cn/user/1415826704971918">@若川</a> 源码活动的第二个打卡。</li>
+<li>该期活动地址<a target="_blank" rel="noopener" href="https://juejin.cn/post/7079765637437849614">【若川视野 x 源码共读】第24期 | vue2工具函数</a></li>
+</ol>
+<h1 id="工具函数"><a href="#工具函数" class="headerlink" title="工具函数"></a>工具函数</h1><h2 id="1-emptyObject"><a href="#1-emptyObject" class="headerlink" title="1. emptyObject"></a>1. emptyObject</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span></span><br><span class="line"><span class="comment"> * Vue.js v2.6.14</span></span><br><span class="line"><span class="comment"> * (c) 2014-2021 Evan You</span></span><br><span class="line"><span class="comment"> * Released under the MIT License.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/*  */</span></span><br><span class="line"><span class="keyword">var</span> emptyObject = <span class="built_in">Object</span>.freeze(&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://lxchuan12.gitee.io/js-object-api/#object-isfrozen-obj-es5"><strong>Object.freeze()</strong></a></p>
+<blockquote>
+<p><code>Object.freeze()</code> 方法可以冻结一个对象，冻结指的是不能向这个对象添加新的属性，不能修改其已有属性的值，不能删除已有属性，以及不能修改该对象已有属性的可枚举性、可配置性、可写性。也就是说，这个对象永远是不可变的。该方法返回被冻结的对象。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> deadline = <span class="built_in">Object</span>.freeze(&#123;<span class="attr">date</span>: <span class="string">&#x27;yesterday&#x27;</span>&#125;);</span><br><span class="line">deadline.date = <span class="string">&#x27;tomorrow&#x27;</span>;</span><br><span class="line">deadline.excuse = <span class="string">&#x27;lame&#x27;</span>;</span><br><span class="line">deadline.date; <span class="comment">// &#x27;yesterday&#x27; 不可以修改已有属性的值</span></span><br><span class="line">deadline.excuse; <span class="comment">// undefined 不可以向这个对象中添加新的属性</span></span><br><span class="line"><span class="built_in">Object</span>.isSealed(deadline); <span class="comment">// true; </span></span><br><span class="line"><span class="built_in">Object</span>.isFrozen(deadline); <span class="comment">// true 判断对象是否冻结的方法</span></span><br><span class="line"><span class="built_in">Object</span>.getOwnPropertyDescriptor(deadline, <span class="string">&#x27;date&#x27;</span>);</span><br><span class="line"><span class="comment">// &#123;value: &quot;yesterday&quot;, writable: false, enumerable: true, configurable: false&#125; (不可配置，不可写)</span></span><br><span class="line"><span class="built_in">Object</span>.keys(deadline); <span class="comment">// [&#x27;date&#x27;] (可枚举)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-isUndef"><a href="#2-isUndef" class="headerlink" title="2. isUndef"></a>2. isUndef</h2><blockquote>
+<p>判断是否是未定义</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// These helpers produce better VM code in JS engines due to their</span></span><br><span class="line"><span class="comment">// explicitness and function inlining.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isUndef</span> (<span class="params">v</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> v === <span class="literal">undefined</span> || v === <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-isDef"><a href="#3-isDef" class="headerlink" title="3. isDef"></a>3. isDef</h2><blockquote>
+<p>判断是否已经定义</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// These helpers produce better VM code in JS engines due to their</span></span><br><span class="line"><span class="comment">// explicitness and function inlining.</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isDef</span> (<span class="params">v</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> v !== <span class="literal">undefined</span> &amp;&amp; v !== <span class="literal">null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-isTrue"><a href="#4-isTrue" class="headerlink" title="4. isTrue"></a>4. isTrue</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isTrue</span> (<span class="params">v</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> v === <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-isFalse"><a href="#5-isFalse" class="headerlink" title="5. isFalse"></a>5. isFalse</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isFalse</span> (<span class="params">v</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> v === <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-isPrimitive"><a href="#6-isPrimitive" class="headerlink" title="6. isPrimitive"></a>6. isPrimitive</h2><blockquote>
+<p>判断值是否是原始值</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Check if value is primitive.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPrimitive</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="keyword">typeof</span> value === <span class="string">&#x27;string&#x27;</span> ||</span><br><span class="line">    <span class="keyword">typeof</span> value === <span class="string">&#x27;number&#x27;</span> ||</span><br><span class="line">    <span class="comment">// $flow-disable-line</span></span><br><span class="line">    <span class="keyword">typeof</span> value === <span class="string">&#x27;symbol&#x27;</span> ||</span><br><span class="line">    <span class="keyword">typeof</span> value === <span class="string">&#x27;boolean&#x27;</span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-isObject"><a href="#7-isObject" class="headerlink" title="7. isObject"></a>7. isObject</h2><blockquote>
+<p>判断是否是对象，没有区分对象和数组</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Quick object check - this is primarily used to tell</span></span><br><span class="line"><span class="comment"> * Objects from primitive values when we know the value</span></span><br><span class="line"><span class="comment"> * is a JSON-compliant type.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isObejct</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> obj !== <span class="literal">null</span> &amp;&amp; type <span class="keyword">of</span> === <span class="string">&#x27;object&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-toRowType"><a href="#8-toRowType" class="headerlink" title="8. toRowType"></a>8. toRowType</h2><blockquote>
+<p>转换成原始类型</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _toString = <span class="built_in">Object</span>.prototype.toString;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toRowType</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> _toString.call(value).slice(<span class="number">8</span>, -<span class="number">1</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">toRowType(<span class="string">&#x27;&#x27;</span>) <span class="comment">// &#x27;String&#x27;</span></span><br><span class="line">toRowType()<span class="comment">// &#x27;undefined&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>为什么需要.slice(8, -1)</strong></p>
+<ol>
+<li>_toString.call(value) 生成结果[object String] 。</li>
+<li><a href="%E4%BA%8C%E3%80%81vue-shared.md">二、vue-shared.md</a> __toString.call(value).slice(8, -1) 去掉[object和]。</li>
+</ol>
+<h2 id="9-isPlainObject"><a href="#9-isPlainObject" class="headerlink" title="9. isPlainObject"></a>9. isPlainObject</h2><blockquote>
+<p>判断是否是纯对象</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPlainObject</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> _toString.call(obj) === <span class="string">&#x27;[object Object]&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">isPlainObject(&#123;&#125;) <span class="comment">// true</span></span><br><span class="line">isPlainObject([])</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-isRegExp"><a href="#10-isRegExp" class="headerlink" title="10. isRegExp"></a>10. isRegExp</h2><blockquote>
+<p>判断是否是正则表达式</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isRegExp</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> _toString.call(obj) === <span class="string">&#x27;[object RegExp]&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="11-isValidArrayIndex"><a href="#11-isValidArrayIndex" class="headerlink" title="11. isValidArrayIndex"></a>11. isValidArrayIndex</h2><blockquote>
+<p>判断是否是可用的数组索引值</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isValidArrayIndex</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> n = <span class="built_in">parseFloat</span>(<span class="built_in">String</span>(val));</span><br><span class="line">  <span class="keyword">return</span> n &gt;= <span class="number">0</span> &amp;&amp; <span class="built_in">Math</span>.floor(n) === n &amp;&amp; <span class="built_in">isFinite</span>(val);、</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>为什么要使用parseFloat？</p>
+<p>使用parseFloat可解析其他进制字符串时，有可能由于计算精度问题无法得到一个确定的十进制证书。</p>
+</li>
+<li><p>为什么使用isFinite</p>
+<blockquote>
+<p>is Finite()函数判断被传入的参数值是否为一个有限数值。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">isFinite</span>(<span class="literal">Infinity</span>);  <span class="comment">// false</span></span><br><span class="line"><span class="built_in">isFinite</span>(<span class="literal">NaN</span>);       <span class="comment">// false</span></span><br><span class="line"><span class="built_in">isFinite</span>(-<span class="literal">Infinity</span>); <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">isFinite</span>(<span class="number">0</span>);         <span class="comment">// true</span></span><br><span class="line"><span class="built_in">isFinite</span>(<span class="number">2e64</span>);      <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">isFinite</span>(<span class="string">&#x27;0&#x27;</span>);       <span class="comment">// true</span></span><br><span class="line"><span class="built_in">Number</span>.isFinite(<span class="string">&#x27;0&#x27;</span>) <span class="comment">// false </span></span><br><span class="line"><span class="built_in">Number</span>.isFinite(<span class="literal">null</span>) <span class="comment">// false</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="12-isPromise"><a href="#12-isPromise" class="headerlink" title="12. isPromise"></a>12. isPromise</h1><blockquote>
+<p>判断是否是promise</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">funciton <span class="function"><span class="title">isPromise</span>(<span class="params">val</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">  	isDef(val) &amp;&amp; </span><br><span class="line">    <span class="keyword">typeof</span> val.then === <span class="string">&#x27;function&#x27;</span> &amp;&amp;</span><br><span class="line">    <span class="keyword">typeof</span> val.catch === <span class="string">&#x27;function&#x27;</span></span><br><span class="line"> 	)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">isPromise(<span class="keyword">new</span> <span class="built_in">Promise</span>()) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="13-toString转字符串"><a href="#13-toString转字符串" class="headerlink" title="13. toString转字符串"></a>13. toString转字符串</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> _toString = <span class="built_in">Object</span>.prototype.toString;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toString</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> val == <span class="literal">null</span> </span><br><span class="line">		? <span class="string">&#x27;&#x27;</span> </span><br><span class="line">		: <span class="built_in">Array</span>.isArray(val) || (isPlainObject(val) &amp;&amp; val.toString === _toString)</span><br><span class="line">			? <span class="built_in">JSON</span>.stringify(val, <span class="literal">null</span>, <span class="number">2</span>)</span><br><span class="line">			: <span class="built_in">String</span>(val)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>数组或者对象并且对象的<code>toString</code> 方法是Object.prototype.toString，用JSON.stringify转换</p>
+</li>
+<li><p>JSON.stringify(val, null, 2)</p>
+<ol>
+<li><p>JSON.stringify(value, replacer, space)</p>
+<ul>
+<li><code>value</code> 序列化为一个JSON字符串的值</li>
+<li><code>replacer</code> 如果该参数是一个函数，则在序列化过程中，被序列化的值的每个属性都会经过该函数的转换和处理；如果该参数是一个数组，则只有包含在这个数组中的属性名才会被序列化到最终的 JSON 字符串中；如果该参数为 null 或者未提供，则对象所有的属性都会被序列化。</li>
+<li><code>space</code> 指定缩进用的空白字符串，用于美化输出（pretty-print）；如果参数是个数字，它代表有多少的空格；上限为10。该值若小于1，则意味着没有空格；如果该参数为字符串（当字符串长度超过10个字母，取其前10个字母），该字符串将被作为空格；如果该参数没有提供（或者为 null），将没有空格。</li>
+</ul>
+</li>
+<li><p>例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">replacer</span>(<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> value === <span class="string">&quot;string&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> foo = &#123;</span><br><span class="line">  <span class="attr">foundation</span>: <span class="string">&quot;Mozilla&quot;</span>,</span><br><span class="line">  <span class="attr">model</span>: <span class="string">&quot;box&quot;</span>,</span><br><span class="line">  <span class="attr">week</span>: <span class="number">45</span>,</span><br><span class="line">  <span class="attr">transport</span>: <span class="string">&quot;car&quot;</span>,</span><br><span class="line">  <span class="attr">month</span>: <span class="number">7</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> jsonString = <span class="built_in">JSON</span>.stringify(foo, replacer);<span class="comment">// &#123;week: 45, month: 7&#125;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<h1 id="14-toNumber"><a href="#14-toNumber" class="headerlink" title="14. toNumber"></a>14. toNumber</h1><blockquote>
+<p>转数字</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toNumber</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> n = <span class="built_in">parseFloat</span>(val);</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">isNaN</span>(n) ? val : n;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">toNumber(<span class="string">&#x27;a&#x27;</span>) <span class="comment">// &#x27;a&#x27;</span></span><br><span class="line">toNumber(<span class="string">&#x27;1&#x27;</span>) <span class="comment">// 1</span></span><br><span class="line">toNumber(<span class="string">&#x27;1a&#x27;</span>) <span class="comment">// 1</span></span><br><span class="line">toNumber(<span class="string">&#x27;a1&#x27;</span>) <span class="comment">// &#x27;a1&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="15-makeMap生成一个map"><a href="#15-makeMap生成一个map" class="headerlink" title="15. makeMap生成一个map"></a>15. makeMap生成一个map</h1><blockquote>
+<p>传入一个以逗号分隔的字符串，生成一个map，并且返回一个函数检测key值在不在这个map中。第二个参数是小写选项。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 传入一个以逗号分隔的字符串，生成一个 map(键值对) ，并且返回一个函数检测 key 值在不在这个 map 中。第二个参数是小写选项。</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeMap</span>(<span class="params">str, expectsLowerCase</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> map = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">let</span> list = str.split(<span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; list.length; i++) &#123;</span><br><span class="line">    map[list[i]] = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> expectsLowerCase</span><br><span class="line">    ? <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123; <span class="keyword">return</span> map[val.toLowerCase()]; &#125;</span><br><span class="line">    : <span class="function"><span class="keyword">function</span> (<span class="params">val</span>) </span>&#123; <span class="keyword">return</span> map[val] &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> str = <span class="string">&#x27;123,456,789&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> makeMapStrFunc = makeMap(str, <span class="literal">false</span>);</span><br><span class="line">makeMapStrFunc(<span class="string">&#x27;123&#x27;</span>); <span class="comment">// true</span></span><br><span class="line">makeMapStrFunc(<span class="string">&#x27;145&#x27;</span>); <span class="comment">// undefined</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="16-isBuiltInTag"><a href="#16-isBuiltInTag" class="headerlink" title="16. isBuiltInTag"></a>16. isBuiltInTag</h1><blockquote>
+<p>判断是否是内置的Tag</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isBuiltInTag = makeMap(<span class="string">&#x27;slot, component&#x27;</span>, <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">isBuiltInTag(<span class="string">&#x27;slot&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">isBuiltInTag(<span class="string">&#x27;component&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">isBuiltInTag(<span class="string">&#x27;Slot&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">isBuiltInTag(<span class="string">&#x27;Component&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="17-isReservedAttribute"><a href="#17-isReservedAttribute" class="headerlink" title="17. isReservedAttribute"></a>17. isReservedAttribute</h1><blockquote>
+<p>判断是否是保留的属性</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> isReservedAttribute = makeMap(<span class="string">&#x27;key,ref,slot,slot-scope,is&#x27;</span>);</span><br><span class="line"></span><br><span class="line">isReservedAttribute(<span class="string">&#x27;key&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">isReservedAttribute(<span class="string">&#x27;ref&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">isReservedAttribute(<span class="string">&#x27;slot&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">isReservedAttribute(<span class="string">&#x27;slot-scope&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">isReservedAttribute(<span class="string">&#x27;is&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">isReservedAttribute(<span class="string">&#x27;IS&#x27;</span>) <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="18-remove"><a href="#18-remove" class="headerlink" title="18. remove"></a>18. remove</h1><blockquote>
+<p>移除数组中的某一项</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">remove</span>(<span class="params">arr, item</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (arr.length) &#123;</span><br><span class="line">    <span class="keyword">var</span> index = arr.indexOf(item);</span><br><span class="line">    <span class="keyword">if</span> (index &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> arr.splice(index, <span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>splice</code> 其实是一个很耗性能的方法。删除数组中的一项，其他元素都要移动位置。</p>
+<p><strong>引申</strong>：<a href="https://link.juejin.cn/?target=https://github.com/axios/axios/blob/master/lib/core/InterceptorManager.js"><code>axios InterceptorManager</code> 拦截器源码</a> 中，拦截器用数组存储的。但实际移除拦截器时，只是把拦截器置为 <code>null</code> 。而不是用<code>splice</code>移除。最后执行时为 <code>null</code> 的不执行，同样效果。<code>axios</code> 拦截器这个场景下，不得不说为性能做到了很好的考虑。<strong>因为拦截器是用户自定义的，理论上可以有无数个，所以做性能考虑是必要的</strong>。</p>
+<p>看如下 <code>axios</code> 拦截器代码示例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 代码有删减</span></span><br><span class="line"><span class="comment">// 声明</span></span><br><span class="line"><span class="built_in">this</span>.handlers = [];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移除</span></span><br><span class="line"><span class="keyword">if</span> (<span class="built_in">this</span>.handlers[id]) &#123;</span><br><span class="line"><span class="built_in">this</span>.handlers[id] = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行</span></span><br><span class="line"><span class="keyword">if</span> (h !== <span class="literal">null</span>) &#123;</span><br><span class="line">fn(h);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h1 id="19-hasOwn"><a href="#19-hasOwn" class="headerlink" title="19. hasOwn"></a>19. hasOwn</h1><blockquote>
+<p>检测是否是自己的属性</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hasOwnProperty = <span class="built_in">Object</span>.prototype.hasOwnProperty;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasOwn</span>(<span class="params">obj, key</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> hasOwnProperty.call(obj, key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> hasOwnProperty = <span class="built_in">Object</span>.prototype.hasOwnProperty;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">hasOwn</span>(<span class="params">obj, key</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> hasOwnProperty.call(obj, key);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="number">123</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(obj.hasOwnProperty(<span class="string">&#x27;a&#x27;</span>));  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(hasOwn(obj, <span class="string">&#x27;a&#x27;</span>)); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(hasOwn(obj, <span class="string">&#x27;b&#x27;</span>)); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="20-cached"><a href="#20-cached" class="headerlink" title="20. cached"></a>20. cached</h1><blockquote>
+<p>缓存</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cached</span> (<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> cache = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">return</span> (<span class="function"><span class="keyword">function</span> <span class="title">cachedFn</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> hit = cached[str];</span><br><span class="line">    <span class="keyword">return</span> hit || (cache[str] = fn(str));</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="21-camelize"><a href="#21-camelize" class="headerlink" title="21. camelize"></a>21. camelize</h1><blockquote>
+<p>连字符转小驼峰 如 on-click =&gt; onClick</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> camelizeRE = <span class="regexp">/-(\w)/g</span>;</span><br><span class="line"><span class="keyword">var</span> camelize = cached(<span class="function"><span class="keyword">function</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.replace(camelizeRE, <span class="function"><span class="keyword">function</span> (<span class="params">_, c</span>) </span>&#123; <span class="keyword">return</span> c ? c.toUpperCase() : <span class="string">&#x27;&#x27;</span> &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><p>\w 表示 [0-9a-zA-Z_]。表示数字、大小写字母和下划线。 </p>
+</li>
+<li><p>```javascript<br>String.prototype.replace(regexp | substr, newSubStr|function)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">   我们来重点看一下第二个参数中的`function` 中的参数 </span><br><span class="line"></span><br><span class="line">   [MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/String/replace#%E6%8C%87%E5%AE%9A%E4%B8%80%E4%B8%AA%E5%87%BD%E6%95%B0%E4%BD%9C%E4%B8%BA%E5%8F%82%E6%95%B0)</span><br><span class="line"></span><br><span class="line">   - `match`</span><br><span class="line"></span><br><span class="line">   - `p1,p2, ...` 假如replace()方法的第一个参数是一个[`RegExp`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp) 对象，则代表第n个括号匹配的字符串。如果是用 `/(\a+)(\b+)/` 这个来匹配，`p1` 就是匹配的 `\a+`，`p2` 就是匹配的 `\b+`。</span><br><span class="line"></span><br><span class="line">     &gt; 因此，在这里，_ 的值是 -c,  c 的值 是 c</span><br><span class="line"></span><br><span class="line">   - ...</span><br><span class="line"></span><br><span class="line"># 22. capitalize</span><br><span class="line"></span><br><span class="line">&gt; 首字母转大写</span><br><span class="line"></span><br><span class="line">```javascript</span><br><span class="line">var capitalize = cached(function (str) &#123;</span><br><span class="line">  return str.charAt(0).toUpperCase() + str.slice(1);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h1 id="23-hyphenate"><a href="#23-hyphenate" class="headerlink" title="23. hyphenate"></a>23. hyphenate</h1><blockquote>
+<p>小驼峰转连字符 onClick =&gt; on-click</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> hyphenateRE = <span class="regexp">/\B([A-Z])/g</span>;</span><br><span class="line"><span class="keyword">var</span> hyphenate = cached(<span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.replace(hyphenateRE, <span class="string">&#x27;-$1&#x27;</span>).toLowerCase();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h1 id="24-polyfillBind"><a href="#24-polyfillBind" class="headerlink" title="24. polyfillBind"></a>24. polyfillBind</h1><blockquote>
+<p> bind垫片 兼容了老版本浏览器不支持原生的bind函数。同时兼容写法，对参数的多少做出了判断，使用call和apply实现。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">polyfillBind</span>(<span class="params">fn, ctx</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">boundFn</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> l = <span class="built_in">arguments</span>.length;</span><br><span class="line">    <span class="keyword">return</span> l</span><br><span class="line">      ? l &gt; <span class="number">1</span></span><br><span class="line">        ? fn.apply(ctx, <span class="built_in">arguments</span>)</span><br><span class="line">        : fn.call(ctx, a)</span><br><span class="line">      : fn.call(ctx)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  boundFn._length = fn.length;</span><br><span class="line">  <span class="keyword">return</span> boundFn;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">nativeBind</span>(<span class="params">fn, ctx</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> fn.bind(ctx);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> bind = <span class="built_in">Function</span>.prototype.bind</span><br><span class="line">  ? nativeBind</span><br><span class="line">  : polyfillBind;</span><br></pre></td></tr></table></figure>
+
+<h1 id="25-toArray"><a href="#25-toArray" class="headerlink" title="25. toArray"></a>25. toArray</h1><blockquote>
+<p>把类数组转成真正的数组， 支持从指定位置开始转化，默认从0开始。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toArray</span>(<span class="params">list, start</span>) </span>&#123;</span><br><span class="line">  start = start || <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> i = list.length - start;</span><br><span class="line">  <span class="keyword">var</span> ret = <span class="keyword">new</span> <span class="built_in">Array</span>(i);</span><br><span class="line">  <span class="keyword">while</span> (i--) &#123;</span><br><span class="line">    ret[i] = list[i + start];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 例子</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> args = toArray(<span class="built_in">arguments</span>); </span><br><span class="line">  <span class="built_in">console</span>.log(args); <span class="comment">// 1, 2, 3, 4, 5</span></span><br><span class="line">  <span class="keyword">var</span> args2 = toArray(<span class="built_in">arguments</span>, <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(args2); <span class="comment">// 3, 4, 5</span></span><br><span class="line">&#125;</span><br><span class="line">fn(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br></pre></td></tr></table></figure>
+
+<h1 id="26-extend"><a href="#26-extend" class="headerlink" title="26. extend"></a>26. extend</h1><blockquote>
+<p>合并对象</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params">to, _from</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> key <span class="keyword">in</span> _from) &#123;</span><br><span class="line">    to[key] = _from[key];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> to;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 例子</span></span><br><span class="line"><span class="keyword">const</span> data = &#123; <span class="attr">name</span>: <span class="string">&#x27;lily&#x27;</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> data2 = extend(data, &#123; <span class="attr">age</span>: <span class="string">&#x27;18&#x27;</span>, <span class="attr">name</span>: <span class="string">&#x27;lily1&#x27;</span> &#125;);</span><br><span class="line"><span class="built_in">console</span>.log(data); <span class="comment">// &#123; age: &#x27;18&#x27;, name: &#x27;lily1&#x27; &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(data2); <span class="comment">// &#123; age: &#x27;18&#x27;, name: &#x27;lily1&#x27; &#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(data === data2); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="27-toObject"><a href="#27-toObject" class="headerlink" title="27. toObject"></a>27. toObject</h1><blockquote>
+<p>转对象， 传入的是个数组，后面的元素会覆盖前面的元素</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toObject</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> res = &#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i]) &#123;</span><br><span class="line">      extend(res, arr[i])</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//例子</span></span><br><span class="line">toObject([<span class="string">&#x27;笑嘻嘻&#x27;</span>,<span class="string">&#x27;哈哈呵呵&#x27;</span>]); <span class="comment">// 哈哈呵呵</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="28-noop"><a href="#28-noop" class="headerlink" title="28. noop"></a>28. noop</h1><blockquote>
+<p>空函数</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">noop</span>(<span class="params">a, b, c</span>) </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="29-no"><a href="#29-no" class="headerlink" title="29. no"></a>29. no</h1><blockquote>
+<p>一直返回false</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> no = <span class="function"><span class="keyword">function</span>(<span class="params">a, b, c</span>) </span>&#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="30-identity"><a href="#30-identity" class="headerlink" title="30. identity"></a>30. identity</h1><blockquote>
+<p>返回参数本身</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> identity = <span class="function"><span class="keyword">function</span>(<span class="params">_</span>) </span>&#123;  <span class="keyword">return</span> _; &#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="31-genStaticKeys"><a href="#31-genStaticKeys" class="headerlink" title="31. genStaticKeys"></a>31. genStaticKeys</h1><blockquote>
+<p>生成静态属性</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">genStaticKeys</span> (<span class="params">modules</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> modules.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">keys, m</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> keys.concat(m.staticKeys || [])</span><br><span class="line">  &#125;, []).join(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="32-looseEqual"><a href="#32-looseEqual" class="headerlink" title="32. looseEqual"></a>32. looseEqual</h1><blockquote>
+<p>宽松相等</p>
+</blockquote>
+<p>由于数组、对象等是引用类型，所以两个内容看起来相等，严格相等都是不相等。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> b = &#123;&#125;;</span><br><span class="line">a === b; <span class="comment">// false</span></span><br><span class="line">a == b; <span class="comment">// false</span></span><br><span class="line">复制代码</span><br></pre></td></tr></table></figure>
+
+<p>所以该函数是对数组、日期、对象进行递归比对。如果内容完全相等则宽松相等。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">looseEqual</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (a === b) &#123; <span class="keyword">return</span> <span class="literal">true</span> &#125;;</span><br><span class="line">  <span class="keyword">var</span> isObjectA = isObject(a);</span><br><span class="line">  <span class="keyword">var</span> isObjectB = isObject(b);</span><br><span class="line">  <span class="keyword">if</span> (isObjectA &amp;&amp; isObjectB) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">var</span> isArrayA = <span class="built_in">Array</span>.isArray(a);</span><br><span class="line">      <span class="keyword">var</span> isArrayB = <span class="built_in">Array</span>.isArray(b);</span><br><span class="line">      <span class="keyword">if</span> (isArrayA &amp;&amp; isArrayB) &#123;</span><br><span class="line">        <span class="keyword">return</span> a.length === b.length &amp;&amp; a.every(<span class="function"><span class="keyword">function</span> (<span class="params">e, i</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> looseEqual(e, b[i])</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (a <span class="keyword">instanceof</span> <span class="built_in">Date</span> &amp;&amp; b <span class="keyword">instanceof</span> <span class="built_in">Date</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> a.getTime() === b.getTime();</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!isArrayA &amp;&amp; !isArrayB) &#123;</span><br><span class="line">        <span class="keyword">var</span> keysA = <span class="built_in">Object</span>.keys(a);</span><br><span class="line">        <span class="keyword">var</span> keysB = <span class="built_in">Object</span>.keys(b);</span><br><span class="line">        <span class="keyword">return</span> keysA.length === keysB.length &amp;&amp; keysA.every(<span class="function"><span class="keyword">function</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> looseEqual(a[key], b[key])</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!isObjectA &amp;&amp; !isObjectB) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">String</span>(a) === <span class="built_in">String</span>(b);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="33-looseIndexOf"><a href="#33-looseIndexOf" class="headerlink" title="33. looseIndexOf"></a>33. looseIndexOf</h1><blockquote>
+<p>宽松的in de x O f</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">looseIndexOf</span>(<span class="params">arr, val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="function"><span class="title">looseEqual</span>(<span class="params">arr[i], val</span>)</span> &#123; <span class="keyword">return</span> i &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="34-once"><a href="#34-once" class="headerlink" title="34. once"></a>34. once</h1><blockquote>
+<p>利用闭包特性，存储状态，实现函数只执行一次</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">once</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> called = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!called) &#123; </span><br><span class="line">      called = <span class="literal">true</span>;</span><br><span class="line">      fn.apply(called, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/22/git%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/22/git%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">git规范</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-22 18:06:37" itemprop="dateCreated datePublished" datetime="2022-04-22T18:06:37+00:00">2022-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 02:32:59" itemprop="dateModified" datetime="2022-04-26T02:32:59+00:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">前端工程</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一、提交的代码规范"><a href="#一、提交的代码规范" class="headerlink" title="一、提交的代码规范"></a>一、提交的代码规范</h1><p><code>husky</code> + <code>lint-staged</code> + <code>pre-commit</code></p>
+<p><strong>husky:</strong> 操作git钩子的工具</p>
+<p><strong>lint-staged:</strong> 本地暂存代码检查工具</p>
+<p><strong>pre-commit:</strong> 通过钩子函数，判断提交的代码是否符合规范</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/04/22/git%E8%A7%84%E8%8C%83/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/04/19/%E3%80%8A%E5%B8%A6%E4%BD%A0%E5%85%A5%E9%97%A8%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E3%80%8B%E5%AE%9E%E8%B7%B5-%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/04/19/%E3%80%8A%E5%B8%A6%E4%BD%A0%E5%85%A5%E9%97%A8%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E3%80%8B%E5%AE%9E%E8%B7%B5-%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" class="post-title-link" itemprop="url">代码规范</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-04-19 08:25:47" itemprop="dateCreated datePublished" datetime="2022-04-19T08:25:47+00:00">2022-04-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 02:32:59" itemprop="dateModified" datetime="2022-04-26T02:32:59+00:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">前端工程</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>18 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="一、代码规范"><a href="#一、代码规范" class="headerlink" title="一、代码规范"></a>一、代码规范</h1><p>工程没有具体统一的规范，包括有<code>代码格式</code> , <code>命名规范</code> , <code>文档注释</code> 。现在每个人都有自己的代码规范造成项目存在几种不同的规范，难以阅读。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/04/19/%E3%80%8A%E5%B8%A6%E4%BD%A0%E5%85%A5%E9%97%A8%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E3%80%8B%E5%AE%9E%E8%B7%B5-%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/24/02%EF%BD%9CTCP%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%A1%B5%E9%9D%A2%E6%96%87%E4%BB%B6%E8%83%BD%E8%A2%AB%E5%AE%8C%E6%95%B4%E9%80%81%E8%BE%BE%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/24/02%EF%BD%9CTCP%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%A1%B5%E9%9D%A2%E6%96%87%E4%BB%B6%E8%83%BD%E8%A2%AB%E5%AE%8C%E6%95%B4%E9%80%81%E8%BE%BE%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%9F/" class="post-title-link" itemprop="url">02 | TCP协议：如何保证页面文件能被完整送达浏览器？</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-24 23:22:29" itemprop="dateCreated datePublished" datetime="2022-03-24T23:22:29+00:00">2022-03-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 02:32:59" itemprop="dateModified" datetime="2022-04-26T02:32:59+00:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-IP：把数据包送达目的主机"><a href="#1-IP：把数据包送达目的主机" class="headerlink" title="1. IP：把数据包送达目的主机"></a>1. IP：把数据包送达目的主机</h1><p><strong>计算机的地址称为IP地址，访问任何网站实际上只是你的计算机向另外一台计算机请求信息。</strong><br><img src="https://cdn.nlark.com/yuque/0/2022/png/323971/1647998216854-c2a1b421-59d6-4550-ade3-10ad68e511f8.png" alt="image.png"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/24/02%EF%BD%9CTCP%E5%8D%8F%E8%AE%AE%EF%BC%9A%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E9%A1%B5%E9%9D%A2%E6%96%87%E4%BB%B6%E8%83%BD%E8%A2%AB%E5%AE%8C%E6%95%B4%E9%80%81%E8%BE%BE%E6%B5%8F%E8%A7%88%E5%99%A8%EF%BC%9F/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/22/01%EF%BD%9CChrome%E6%9E%B6%E6%9E%84%EF%BC%9A%E4%BB%85%E4%BB%85%E6%89%93%E5%BC%80%E4%BA%861%E4%B8%AA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%894%E4%B8%AA%E8%BF%9B%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/22/01%EF%BD%9CChrome%E6%9E%B6%E6%9E%84%EF%BC%9A%E4%BB%85%E4%BB%85%E6%89%93%E5%BC%80%E4%BA%861%E4%B8%AA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%894%E4%B8%AA%E8%BF%9B%E7%A8%8B/" class="post-title-link" itemprop="url">01｜Chrome架构：仅仅打开了1个页面，为什么有4个进程</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-22 13:11:44" itemprop="dateCreated datePublished" datetime="2022-03-22T13:11:44+00:00">2022-03-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 02:32:59" itemprop="dateModified" datetime="2022-04-26T02:32:59+00:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">网络</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>这是阅读李兵 ——《浏览器工作原理与实践》并作出总结的第一天，整个专题共有46讲，规划是一天做一讲的总结并回顾之前的文章。</p>
+</blockquote>
+<h1 id="1-进程和线程"><a href="#1-进程和线程" class="headerlink" title="1. 进程和线程"></a>1. 进程和线程</h1><h2 id="1-1-什么是并行处理"><a href="#1-1-什么是并行处理" class="headerlink" title="1.1 什么是并行处理"></a>1.1 什么是并行处理</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/22/01%EF%BD%9CChrome%E6%9E%B6%E6%9E%84%EF%BC%9A%E4%BB%85%E4%BB%85%E6%89%93%E5%BC%80%E4%BA%861%E4%B8%AA%E9%A1%B5%E9%9D%A2%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%894%E4%B8%AA%E8%BF%9B%E7%A8%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/15/Promise%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/15/Promise%E5%AE%9E%E7%8E%B0/" class="post-title-link" itemprop="url">Promise实现</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-15 22:26:58" itemprop="dateCreated datePublished" datetime="2022-03-15T22:26:58+00:00">2022-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 02:32:59" itemprop="dateModified" datetime="2022-04-26T02:32:59+00:00">2022-04-26</time>
+              </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>7.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="1-初始结构"><a href="#1-初始结构" class="headerlink" title="1. 初始结构"></a>1. 初始结构</h1><h2 id="原生"><a href="#原生" class="headerlink" title="原生"></a>原生</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise1 = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>传入func，func的参数分别是resolve, reject
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/15/Promise%E5%AE%9E%E7%8E%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/09/axios%E4%B8%AD%E7%9A%84utils%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/09/axios%E4%B8%AD%E7%9A%84utils%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">axios中的utils工具文件.md</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-09 20:43:06" itemprop="dateCreated datePublished" datetime="2022-03-09T20:43:06+00:00">2022-03-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 02:32:59" itemprop="dateModified" datetime="2022-04-26T02:32:59+00:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/" itemprop="url" rel="index"><span itemprop="name">源码阅读</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>19 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Axios-utils-js"><a href="#Axios-utils-js" class="headerlink" title="Axios/utils.js"></a>Axios/utils.js</h1><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ol>
+<li>这是跟随<a target="_blank" rel="noopener" href="https://juejin.cn/user/1415826704971918">@若川</a> 打卡源码活动的第一个打卡。</li>
+<li>参考<a target="_blank" rel="noopener" href="https://juejin.cn/post/7042610679815241758">阅读axios源码，发现了这些实用的基础工具函数</a> ，不得不说，环境准备写得很细致，所以这边留个记录。</li>
+<li>本次源码阅读的主要内容是<a target="_blank" rel="noopener" href="https://github.com/axios/axios/blob/master/lib/utils.js">utils.js</a>.</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/09/axios%E4%B8%AD%E7%9A%84utils%E5%B7%A5%E5%85%B7%E6%96%87%E4%BB%B6/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/13/leetcode-6006-%E6%8B%BF%E5%87%BA%E6%9C%80%E5%B0%91%E6%95%B0%E7%9B%AE%E7%9A%84%E9%AD%94%E6%B3%95%E8%B1%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/13/leetcode-6006-%E6%8B%BF%E5%87%BA%E6%9C%80%E5%B0%91%E6%95%B0%E7%9B%AE%E7%9A%84%E9%AD%94%E6%B3%95%E8%B1%86/" class="post-title-link" itemprop="url">leetcode-6006.拿出最少数目的魔法豆</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-13 21:12:46" itemprop="dateCreated datePublished" datetime="2022-02-13T21:12:46+00:00">2022-02-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 02:32:59" itemprop="dateModified" datetime="2022-04-26T02:32:59+00:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>752</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[来源] 🔗6006.拿出最少数目的魔法豆</p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一个 正 整数数组 beans ，其中每个整数表示一个袋子里装的魔法豆的数目。</p>
+<p>请你从每个袋子中 拿出 一些豆子（也可以 不拿出），使得剩下的 非空 袋子中（即 至少 还有 一颗 魔法豆的袋子）魔法豆的数目 相等 。一旦魔法豆从袋子中取出，你不能将它放到任何其他的袋子中。</p>
+<p>请你返回你需要拿出魔法豆的 最少数目。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">输入：beans = [<span class="number">4</span>,<span class="number">1</span>,<span class="number">6</span>,<span class="number">5</span>]</span><br><span class="line">输出：<span class="number">4</span></span><br><span class="line">解释：</span><br><span class="line">- 我们从有 <span class="number">1</span> 个魔法豆的袋子中拿出 <span class="number">1</span> 颗魔法豆。</span><br><span class="line">  剩下袋子中魔法豆的数目为：[<span class="number">4</span>,<span class="number">0</span>,<span class="number">6</span>,<span class="number">5</span>]</span><br><span class="line">- 然后我们从有 <span class="number">6</span> 个魔法豆的袋子中拿出 <span class="number">2</span> 个魔法豆。</span><br><span class="line">  剩下袋子中魔法豆的数目为：[<span class="number">4</span>,<span class="number">0</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">- 然后我们从有 <span class="number">5</span> 个魔法豆的袋子中拿出 <span class="number">1</span> 个魔法豆。</span><br><span class="line">  剩下袋子中魔法豆的数目为：[<span class="number">4</span>,<span class="number">0</span>,<span class="number">4</span>,<span class="number">4</span>]</span><br><span class="line">总共拿出了 <span class="number">1</span> + <span class="number">2</span> + <span class="number">1</span> = <span class="number">4</span> 个魔法豆，剩下非空袋子中魔法豆的数目相等。</span><br><span class="line">没有比取出 <span class="number">4</span> 个魔法豆更少的方案。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ol>
+<li><p> 拿出魔法豆 + 剩余魔法豆 = 初始魔法豆</p>
+</li>
+<li><p>考虑拿出最少数目的魔法豆，可以转化为剩余最多的魔法豆。</p>
+</li>
+<li><p>beans数组的长度为n，对于每个i袋子，可以剩余的最多魔法豆为</p>
+<p> (n - i) * beans[i]</p>
+</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">minimumRemoval</span>(<span class="params">beans: number[]</span>): <span class="title">number</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> </span><br><span class="line">        len = beans.length,</span><br><span class="line">        sum = <span class="number">0</span>,</span><br><span class="line">        maxSum = <span class="number">0</span>; <span class="comment">// 针对每个袋子可以拿出的魔法豆</span></span><br><span class="line">    beans.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b)</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; beans.length; i++) &#123;</span><br><span class="line">        sum += beans[i];</span><br><span class="line">        maxSum = <span class="built_in">Math</span>.max(maxSum, beans[i] * (len - i) )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sum - maxSum</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/12/leetcode-19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E7%BB%93%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/12/leetcode-19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E7%BB%93%E7%82%B9/" class="post-title-link" itemprop="url">leetcode-19.删除链表的倒数第N个结点</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-12 23:44:48" itemprop="dateCreated datePublished" datetime="2022-02-12T23:44:48+00:00">2022-02-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 02:32:59" itemprop="dateModified" datetime="2022-04-26T02:32:59+00:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[来源] 🔗<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/">19. 删除链表的倒数第 N 个结点</a></p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给你一个链表，删除链表的倒数第 <code>n</code> 个结点，并且返回链表的头结点。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/02/12/leetcode-19-%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E7%BB%93%E7%82%B9/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/12/leetcode-55-%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/avatar.jpeg">
+      <meta itemprop="name" content="LilyChenlin">
+      <meta itemprop="description" content="热爱可抵岁月漫长">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LilyChenlin">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/02/12/leetcode-55-%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/" class="post-title-link" itemprop="url">leetcode-55.跳跃游戏</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-02-12 23:42:41" itemprop="dateCreated datePublished" datetime="2022-02-12T23:42:41+00:00">2022-02-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-26 02:32:59" itemprop="dateModified" datetime="2022-04-26T02:32:59+00:00">2022-04-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>748</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[来源] 🔗<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jump-game/">55. 跳跃游戏</a></p>
+<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>给定一个非负整数数组 nums ，你最初位于数组的 第一个下标 。</p>
+<p>数组中的每个元素代表你在该位置可以跳跃的最大长度。</p>
+<p>判断你是否能够到达最后一个下标。</p>
+<p><strong>示例 1:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [<span class="number">2</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">4</span>]</span><br><span class="line">输出：<span class="literal">true</span></span><br><span class="line">解释：可以先跳 <span class="number">1</span> 步，从下标 <span class="number">0</span> 到达下标 <span class="number">1</span>, 然后再从下标 <span class="number">1</span> 跳 <span class="number">3</span> 步到达最后一个下标。</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例 2：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums = [<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">4</span>]</span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：无论怎样，总会到达下标为 <span class="number">3</span> 的位置。但该下标的最大跳跃长度是 <span class="number">0</span> ， 所以永远不可能到达最后一个下标。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h1><ol>
+<li><p>首先这个思路和数组元素的索引值关系非常大。</p>
+</li>
+<li><p>对于数组 [2, 3, 1, 1, 4] 我们尽可能的取最大的跳跃长度，那么最大跳跃长度能跳到的索引位置为 <a href="%E4%B8%8D%E5%8C%85%E5%90%AB%E6%95%B0%E7%BB%84%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E5%85%83%E7%B4%A0">2, 4, 3, 4</a></p>
+<p> 我们可以得出 k = Math.max(k, nums[i] + i)， k为能够跳到的最远位置。 </p>
+<p> 如果此时k == nums.length - 1 那么就能够到达最后一个标</p>
+</li>
+<li><p>此时考虑到以下情况，[1, 0, 2, 1, 4]，针对每一个元素，最大跳跃长度能跳到的索引位置为[1, 1, 4, 4]。但是此时i = 1时，不能进行跳跃，也就是无法跳到下一个节点，那么尽管后面的元素跳跃长度能够到达最后一个下标，此时结果也为false。</p>
+<p> 所以我们需要通过i 和 k值进行对比，当且仅当i ≤ k时，该节点能够进行下一个跳跃</p>
+</li>
+</ol>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">canJump</span>(<span class="params">nums: number[]</span>): <span class="title">boolean</span> </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> maxLen = <span class="number">0</span>, len = nums.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &gt; maxLen) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        maxLen = <span class="built_in">Math</span>.max(maxLen, nums[i] + i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="LilyChenlin"
+      src="/avatar.jpeg">
+  <p class="site-author-name" itemprop="name">LilyChenlin</p>
+  <div class="site-description" itemprop="description">热爱可抵岁月漫长</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/LilyChenlin" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;LilyChenlin" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:15096361910@163.com" title="E-Mail → mailto:15096361910@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LilyChenlin</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">66k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:01</span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+!-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love-click.js"></script>
